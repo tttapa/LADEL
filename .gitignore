@@ -1,5 +1,5 @@
-.vscode
 build
+.*cache
 *.mexa64
 *.m~
 *.mat
