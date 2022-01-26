@@ -1,6 +1,5 @@
 include(GoogleTest)
 find_package(GTest REQUIRED CONFIG)
-enable_testing()
 
 add_executable(ladel_run_all_tests
     "src/test_scale.cpp"
