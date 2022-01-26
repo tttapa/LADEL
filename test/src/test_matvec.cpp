@@ -29,7 +29,12 @@ void matvec_suite_teardown(void)
     ladel_sparse_free(M);
 }
 
-MU_TEST(test_matvec)
+struct TestMatVec : ::testing::Test {
+    void SetUp() override { matvec_suite_setup(); }
+    void TearDown() override { matvec_suite_teardown(); }
+};
+
+TEST_F(TestMatVec, testMatVec)
 {
     ladel_double x[NCOL] = {1.5, -2, -1, 5, -10};
     ladel_double y[NROW];
@@ -49,7 +54,7 @@ MU_TEST(test_matvec)
     mu_assert_double_eq(y[3], 2*temp[3], TOL);
 }
 
-MU_TEST(test_tpose_matvec)
+TEST_F(TestMatVec, testTposeMatVec)
 {
     ladel_double x[NROW] = {1, -1.5, -2, 100};
     ladel_double y[NCOL];
@@ -69,11 +74,4 @@ MU_TEST(test_tpose_matvec)
     mu_assert_double_eq(y[2], 2*temp[2], TOL);
     mu_assert_double_eq(y[3], 2*temp[3], TOL);
     mu_assert_double_eq(y[4], 2*temp[4], TOL);
-}
-
-MU_TEST_SUITE(suite_matvec)
-{
-    MU_SUITE_CONFIGURE(matvec_suite_setup, matvec_suite_teardown, NULL, NULL);
-    MU_RUN_TEST(test_matvec);
-    MU_RUN_TEST(test_tpose_matvec);
 }

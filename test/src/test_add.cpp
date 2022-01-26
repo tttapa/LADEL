@@ -45,7 +45,18 @@ void add_test_teardown(void)
     B = ladel_sparse_free(B);
 }
 
-MU_TEST(test_add_unsymmetric_matrices)
+struct TestAdd : ::testing::Test {
+    void SetUp() override {
+        add_suite_setup();
+        add_test_setup();
+    }
+    void TearDown() override {
+        add_test_teardown();
+        add_suite_teardown();
+    }
+};
+
+TEST_F(TestAdd, testAddUnsymmetricMatrices)
 {
     ladel_double alpha = 4.0, beta = 0.2;
     ladel_sparse_matrix *C = ladel_add_matrices(alpha, A, beta, B, work);
@@ -63,7 +74,7 @@ MU_TEST(test_add_unsymmetric_matrices)
     ladel_sparse_free(C);
 }
 
-MU_TEST(test_add_symmetric_matrices)
+TEST_F(TestAdd, testAddSymmetricMatrices)
 {
     ladel_double alpha = 4.0, beta = 0.2;
     ladel_to_upper_diag(A);
@@ -97,11 +108,4 @@ MU_TEST(test_add_symmetric_matrices)
     ladel_factor_free(LD);
 
     ladel_sparse_free(C);
-}
-
-MU_TEST_SUITE(suite_add)
-{
-    MU_SUITE_CONFIGURE(add_suite_setup, add_suite_teardown, add_test_setup, add_test_teardown);
-    MU_RUN_TEST(test_add_unsymmetric_matrices);
-    MU_RUN_TEST(test_add_symmetric_matrices);
 }

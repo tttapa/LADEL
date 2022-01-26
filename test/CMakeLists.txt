@@ -1,34 +1,30 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(LADELtest VERSION 0.1.0)
-
-SET(TEST_SRC
-    src/run_all_tests.c
-    src/test_scale.c
-    src/test_matvec.c
-    src/test_matmat.c
-    src/test_upper_diag.c
-    src/test_etree.c
-    src/test_postorder.c
-    src/test_transpose.c
-    src/test_col_counts.c
-    src/test_permutation.c
-    src/test_ldl.c
-    src/test_rank1_mod.c
-    src/test_row_mod.c
-    src/test_add.c
-    src/test_submatrix.c)
+include(GoogleTest)
+find_package(GTest REQUIRED CONFIG)
+enable_testing()
 
 add_executable(ladel_run_all_tests
-    ${TEST_SRC}
+    "src/test_scale.cpp"
+    "src/test_matvec.cpp"
+    "src/test_matmat.cpp"
+    "src/test_upper_diag.cpp"
+    "src/test_etree.cpp"
+    "src/test_postorder.cpp"
+    "src/test_transpose.cpp"
+    "src/test_col_counts.cpp"
+    "src/test_permutation.cpp"
+    "src/test_ldl.cpp"
+    "src/test_rank1_mod.cpp"
+    "src/test_row_mod.cpp"
+    "src/test_add.cpp"
+    "src/test_submatrix.cpp"
 )
 
 target_include_directories(ladel_run_all_tests
     PRIVATE include
-    include/Minunit
+            include/Minunit
 )
 
-target_link_libraries(ladel_run_all_tests ladel)
+target_link_libraries(ladel_run_all_tests PRIVATE ladel)
+target_link_libraries(ladel_run_all_tests PRIVATE GTest::gtest_main)
 
-if(UNIX)
-target_link_libraries(ladel_run_all_tests m)
-endif(UNIX)
+gtest_discover_tests(ladel_run_all_tests)

@@ -1,19 +1,16 @@
 #include "minunit.h"
+#include "ladel_upper_diag.h"
 #include "ladel_types.h"
 #include "ladel_global.h"
-#include "ladel_etree.h"
-#include "ladel_postorder.h"
 
-static ladel_work *work;
 static ladel_sparse_matrix *M;
-static ladel_symbolics *sym;
 #define NROW 11
 #define NCOL 11
 #define NZMAX 43
+#define TOL 1e-8
 
-void postorder_test_setup(void) 
+void upper_diag_test_setup(void) 
 {
-    work = ladel_workspace_allocate(NCOL);
     M = ladel_sparse_alloc(NROW, NCOL, NZMAX, UPPER, TRUE, FALSE);
     M->p[0] = 0; M->p[1] = 3; M->p[2] = 6; M->p[3] = 10; M->p[4] = 13; M->p[5] = 16; 
     M->p[6] = 21; M->p[7] = 24; M->p[8] = 29; M->p[9] = 31; M->p[10] = 37; M->p[11] = 43;
@@ -31,32 +28,36 @@ void postorder_test_setup(void)
     M->x[21] = 16; M->x[22] = 19; M->x[23] = 2; M->x[24] = -15; M->x[25] = -14; M->x[26] = -10; M->x[27] = 14; 
     M->x[28] = -10; M->x[29] = 13; M->x[30] = -11; M->x[31] = 18; M->x[32] = -6; M->x[33] = -12; M->x[34] = -10; 
     M->x[35] = 5; M->x[36] = -1; M->x[37] = -6; M->x[38] = 14; M->x[39] = 3; M->x[40] = 2; M->x[41] = 17; M->x[42] = -9;
-
-    sym = ladel_symbolics_alloc(NCOL);
 }
 
-void postorder_test_teardown(void)
+void upper_diag_test_teardown(void)
 {
-    ladel_workspace_free(work);
     ladel_sparse_free(M);
-    ladel_symbolics_free(sym);
 }
 
-MU_TEST(test_postorder)
+struct TestUpperDiag : ::testing::Test {
+    void SetUp() override { upper_diag_test_setup(); }
+    void TearDown() override { upper_diag_test_teardown(); }
+};
+
+TEST_F(TestUpperDiag, testToUpperDiag)
 {
-    ladel_int postorder_ref[NCOL] = {1, 2, 4, 7, 0, 3, 5, 6, 8, 9, 10};
-    ladel_etree(M, sym, work);
-    ladel_postorder(M, sym, work);
-    
+    ladel_to_upper_diag(M);
+
+    mu_assert_long_eq(M->nzmax, 27);
+
+    ladel_int Mp[NCOL+1] = {0, 1, 2, 4, 5, 6, 9, 11, 14, 16, 21, 27};
+    ladel_int Mi[27] = {0, 1, 1, 2, 3, 4, 0, 3, 5, 0, 6, 1, 4, 7, 5, 8, 2, 3, 5, 7, 9, 2, 4, 6, 7, 9, 10};
+    ladel_double Mx[27] = {12, -2, 10, -9, -14, 19, -11, 10, -10, 16, 19, -15, -14, -10, 13, -11, 18, -6, -12, -10, 5, -6, 14, 3, 2, 17, -9};
+
     ladel_int i;
-    for (i = 0; i < NCOL; i++)
+    for (i = 0; i < NCOL+1; i++)
     {
-        mu_assert_long_eq(sym->postorder[i], postorder_ref[i]);
+        mu_assert_long_eq(M->p[i], Mp[i]);
     }
-}
-
-MU_TEST_SUITE(suite_postorder)
-{
-    MU_SUITE_CONFIGURE(NULL, NULL, postorder_test_setup, postorder_test_teardown);
-    MU_RUN_TEST(test_postorder);
+    for (i = 0; i < 27; i++)
+    {
+        mu_assert_long_eq(M->i[i], Mi[i]);
+        mu_assert_double_eq(M->x[i], Mx[i], TOL);
+    } 
 }

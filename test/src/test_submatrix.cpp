@@ -27,7 +27,12 @@ void submatrix_suite_teardown(void)
     ladel_sparse_free(M);
 }
 
-MU_TEST(test_column_submatrix)
+struct TestSubMatrix : ::testing::Test {
+    void SetUp() override { submatrix_suite_setup(); }
+    void TearDown() override { submatrix_suite_teardown(); }
+};
+
+TEST_F(TestSubMatrix, testColumnSubmatrix)
 {
     ladel_int cols[3] = {0, 2, 4};
     ladel_int nb_cols = 3;
@@ -57,10 +62,4 @@ MU_TEST(test_column_submatrix)
     mu_assert_double_eq(M_sub->x[5], -0.5, TOL);
 
     ladel_sparse_free(M_sub);
-}
-
-MU_TEST_SUITE(suite_submatrix)
-{
-    MU_SUITE_CONFIGURE(submatrix_suite_setup, submatrix_suite_teardown, NULL, NULL);
-    MU_RUN_TEST(test_column_submatrix);
 }

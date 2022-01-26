@@ -74,7 +74,18 @@ void ldl_test_teardown(void)
     LD2 = ladel_factor_free(LD2);
 }
 
-MU_TEST(test_simple_ldl)
+struct TestLDL : ::testing::Test {
+    void SetUp() override {
+        ldl_suite_setup();
+        ldl_test_setup();
+    }
+    void TearDown() override {
+        ldl_test_teardown();
+        ldl_suite_teardown();
+    }
+};
+
+TEST_F(TestLDL, testSimpleLDL)
 {
     ladel_double x[NCOL] = {1, 2, 3, 4, 5};
     ladel_double y[NCOL], y_ref[NCOL] = {-1.738103756708408e-01, -1.081932021466905e-01, 4.379964221824687e-01, 3.594991055456172e-01, -7.519141323792485e-01};
@@ -89,7 +100,7 @@ MU_TEST(test_simple_ldl)
         mu_assert_double_eq(y[index], y_ref[index], TOL);
 }
 
-MU_TEST(test_simple_ldl2)
+TEST_F(TestLDL, testSimpleLDL2)
 {
     ladel_double x[NCOL2] = {1, 2, 3, 4};
     ladel_double y[NCOL2], y_ref[NCOL2] = {-2.0/3.0, 2, 1, 7.0/3};
@@ -104,7 +115,7 @@ MU_TEST(test_simple_ldl2)
         mu_assert_double_eq(y[index], y_ref[index], TOL);
 }
 
-MU_TEST(test_simple_ldl_nz)
+TEST_F(TestLDL, testSimpleLDLnz)
 {
     ladel_double x[NCOL] = {1, 2, 3, 4, 5};
     ladel_double y[NCOL], y_ref[NCOL] = {-1.738103756708408e-01, -1.081932021466905e-01, 4.379964221824687e-01, 3.594991055456172e-01, -7.519141323792485e-01};
@@ -119,7 +130,7 @@ MU_TEST(test_simple_ldl_nz)
         mu_assert_double_eq(y[index], y_ref[index], TOL);
 }
 
-MU_TEST(test_simple_ldl_with_diag)
+TEST_F(TestLDL, testSimpleLDLwithDiag)
 {
     ladel_sparse_matrix *Q = ladel_sparse_alloc(5, 5, 0, UPPER, TRUE, FALSE);
     Q->p[0] = 0; Q->p[1] = 0; Q->p[2] = 0; Q->p[3] = 0; Q->p[4] = 0; Q->p[5] = 0;
@@ -141,7 +152,7 @@ MU_TEST(test_simple_ldl_with_diag)
     Q = ladel_sparse_free(Q);
 }
 
-MU_TEST(test_simple_ldl_with_partial_diag)
+TEST_F(TestLDL, testSimpleLDLwithPartialDiag)
 {
     ladel_diag d;
     d.diag_elem = 2;
@@ -161,7 +172,7 @@ MU_TEST(test_simple_ldl_with_partial_diag)
 }
 
 #ifdef DAMD
-MU_TEST(test_simple_ldl_with_amd)
+TEST_F(TestLDL, testSimpleLDLwithAMD)
 {
     ladel_double x[NCOL] = {1, 2, 3, 4, 5};
     ladel_double y[NCOL], y_ref[NCOL] = {-1.738103756708408e-01, -1.081932021466905e-01, 4.379964221824687e-01, 3.594991055456172e-01, -7.519141323792485e-01};
@@ -178,7 +189,7 @@ MU_TEST(test_simple_ldl_with_amd)
 }
 #endif
 
-MU_TEST(test_advanced_ldl)
+TEST_F(TestLDL, testAdvancedLDL)
 {
     ladel_double x[NCOL] = {1, 2, 3, 4, 5};
     ladel_double y[NCOL], y_ref[NCOL] = {-1.738103756708408e-01, -1.081932021466905e-01, 4.379964221824687e-01, 3.594991055456172e-01, -7.519141323792485e-01};
@@ -191,19 +202,4 @@ MU_TEST(test_advanced_ldl)
 
     for (index = 0; index < NCOL; index++)
         mu_assert_double_eq(y[index], y_ref[index], TOL);
-}
-
-
-MU_TEST_SUITE(suite_ldl)
-{
-    MU_SUITE_CONFIGURE(ldl_suite_setup, ldl_suite_teardown, ldl_test_setup, ldl_test_teardown);
-    MU_RUN_TEST(test_simple_ldl);
-    MU_RUN_TEST(test_simple_ldl2);
-    MU_RUN_TEST(test_simple_ldl_nz);
-    MU_RUN_TEST(test_simple_ldl_with_diag);
-    MU_RUN_TEST(test_simple_ldl_with_partial_diag);
-    #ifdef DAMD
-    MU_RUN_TEST(test_simple_ldl_with_amd);
-    #endif
-    MU_RUN_TEST(test_advanced_ldl);
 }

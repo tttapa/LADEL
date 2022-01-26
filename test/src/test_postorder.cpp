@@ -2,6 +2,7 @@
 #include "ladel_types.h"
 #include "ladel_global.h"
 #include "ladel_etree.h"
+#include "ladel_postorder.h"
 
 static ladel_work *work;
 static ladel_sparse_matrix *M;
@@ -10,7 +11,7 @@ static ladel_symbolics *sym;
 #define NCOL 11
 #define NZMAX 43
 
-void etree_test_setup(void) 
+void postorder_test_setup(void) 
 {
     work = ladel_workspace_allocate(NCOL);
     M = ladel_sparse_alloc(NROW, NCOL, NZMAX, UPPER, TRUE, FALSE);
@@ -34,47 +35,27 @@ void etree_test_setup(void)
     sym = ladel_symbolics_alloc(NCOL);
 }
 
-void etree_test_teardown(void)
+void postorder_test_teardown(void)
 {
     ladel_workspace_free(work);
     ladel_sparse_free(M);
     ladel_symbolics_free(sym);
 }
 
-MU_TEST(test_etree)
+struct TestPostorder : ::testing::Test  {
+    void SetUp() override { postorder_test_setup(); }
+    void TearDown() override { postorder_test_teardown(); }
+};
+
+TEST_F(TestPostorder, testPostorder)
 {
-    ladel_int etree_ref[NCOL] = {5, 2, 7, 5, 7, 6, 8, 9, 9, 10, NONE};
+    ladel_int postorder_ref[NCOL] = {1, 2, 4, 7, 0, 3, 5, 6, 8, 9, 10};
     ladel_etree(M, sym, work);
+    ladel_postorder(M, sym, work);
     
     ladel_int i;
     for (i = 0; i < NCOL; i++)
     {
-        mu_assert_long_eq(sym->etree[i], etree_ref[i]);
+        mu_assert_long_eq(sym->postorder[i], postorder_ref[i]);
     }
-}
-
-#ifdef SIMPLE_COL_COUNTS
-MU_TEST(test_etree_and_col_counts)
-{
-    ladel_int etree_ref[NCOL] = {5, 2, 7, 5, 7, 6, 8, 9, 9, 10, NONE};
-    // ladel_int col_counts_ref[NCOL] = {3, 3, 4, 3, 3, 4, 4, 3, 3, 2, 1};
-    ladel_int col_counts_ref[NCOL] = {3, 6, 10, 13, 16, 20, 24, 27, 30, 32, 33};
-    ladel_int Lnz = ladel_etree_and_col_counts(M, sym, work);
-    mu_assert_long_eq(Lnz, col_counts_ref[NCOL-1]-NCOL);
-    ladel_int col;
-    for (col = 0; col < NCOL; col++)
-    {
-        mu_assert_long_eq(sym->etree[col], etree_ref[col]);
-        mu_assert_long_eq(sym->col_counts[col], col_counts_ref[col]-col-1);        
-    }
-}
-#endif /*SIMPLE_COL_COUNTS*/
-
-MU_TEST_SUITE(suite_etree)
-{
-    MU_SUITE_CONFIGURE(NULL, NULL, etree_test_setup, etree_test_teardown);
-    MU_RUN_TEST(test_etree);
-    #ifdef SIMPLE_COL_COUNTS
-    MU_RUN_TEST(test_etree_and_col_counts);
-    #endif /*SIMPLE_COL_COUNTS*/
 }

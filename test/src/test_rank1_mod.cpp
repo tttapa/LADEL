@@ -73,14 +73,25 @@ void rank1_mod_test_teardown(void)
     LD = ladel_factor_free(LD);
 }
 
-MU_TEST(test_set_union)
+struct TestRank1 : ::testing::Test {
+    void SetUp() override { 
+        rank1_mod_suite_setup();
+        rank1_mod_test_setup();
+    }
+    void TearDown() override {
+        rank1_mod_test_teardown();
+        rank1_mod_suite_teardown();
+    }
+};
+
+TEST_F(TestRank1, testSetUnion)
 {
     ladel_int set1_vals[MAX_SIZE_SET] = {1, 2, 5, 7};
-    ladel_set *set1 = ladel_malloc(1, sizeof(ladel_set));
+    ladel_set *set1 = (ladel_set *) ladel_malloc(1, sizeof(ladel_set));
     ladel_set_set(set1, set1_vals, 4, MAX_SIZE_SET);
 
     ladel_int set2_vals[MAX_SIZE_SET] = {1, 2, 7};
-    ladel_set *set2 = ladel_malloc(1, sizeof(ladel_set));
+    ladel_set *set2 = (ladel_set *) ladel_malloc(1, sizeof(ladel_set));
     ladel_set_set(set2, set2_vals, 3, MAX_SIZE_SET);
 
     ladel_set *dif = work->set_preallocated1;
@@ -95,7 +106,7 @@ MU_TEST(test_set_union)
     mu_assert_long_eq(dif->size_set, 0);
     
     ladel_int set3_vals[MAX_SIZE_SET] = {1, 4, 6, 10, 11};
-    ladel_set *set3 = ladel_malloc(1, sizeof(ladel_set));
+    ladel_set *set3 = (ladel_set *) ladel_malloc(1, sizeof(ladel_set));
     ladel_set_set(set3, set3_vals, 5, MAX_SIZE_SET);
 
     status = ladel_set_union(set1, set3, dif, offset, insertions, 0);
@@ -118,7 +129,7 @@ MU_TEST(test_set_union)
     mu_assert_long_eq(dif->set[3], 11);
 
     ladel_int set4_vals[MAX_SIZE_SET] = {14};
-    ladel_set *set4 = ladel_malloc(1, sizeof(ladel_set));
+    ladel_set *set4 = (ladel_set *) ladel_malloc(1, sizeof(ladel_set));
     ladel_set_set(set4, set4_vals, 1, MAX_SIZE_SET);
 
     status = ladel_set_union(set1, set4, dif, offset, insertions, 0);
@@ -130,7 +141,7 @@ MU_TEST(test_set_union)
     ladel_free(set4);
 }
 
-MU_TEST(test_rank1_mod)
+TEST_F(TestRank1, testRank1Mod)
 {
     ladel_int status, index;
     status = ladel_factorize_advanced(M, sym, NO_ORDERING, &LD, Mbasis, work);
@@ -160,11 +171,4 @@ MU_TEST(test_rank1_mod)
     mu_assert_long_eq(status, SUCCESS);
     ladel_dense_solve(LD, rhs, x, work);
     for (index = 0; index < NCOL; index++) mu_assert_double_eq(x[index], sol[index], TOL);
-}
-
-MU_TEST_SUITE(suite_rank1_mod)
-{
-    MU_SUITE_CONFIGURE(rank1_mod_suite_setup, rank1_mod_suite_teardown, rank1_mod_test_setup, rank1_mod_test_teardown);
-    MU_RUN_TEST(test_set_union);
-    MU_RUN_TEST(test_rank1_mod);
 }

@@ -44,7 +44,12 @@ void col_counts_test_teardown(void)
     ladel_symbolics_free(sym);
 }
 
-MU_TEST(test_col_counts)
+struct TestColCounts : ::testing::Test {
+    void SetUp() override { col_counts_test_setup(); }
+    void TearDown() override { col_counts_test_teardown(); }
+};
+
+TEST_F(TestColCounts, testColCounts)
 {    
     ladel_int col_counts_ref[NCOL] = {3, 6, 10, 13, 16, 20, 24, 27, 30, 32, 33};
     ladel_etree(M, sym, work);
@@ -58,10 +63,4 @@ MU_TEST(test_col_counts)
     {
         mu_assert_long_eq(sym->col_counts[col], col_counts_ref[col]-col-1);
     }
-}
-
-MU_TEST_SUITE(suite_col_counts)
-{
-    MU_SUITE_CONFIGURE(NULL, NULL, col_counts_test_setup, col_counts_test_teardown);
-    MU_RUN_TEST(test_col_counts);
 }

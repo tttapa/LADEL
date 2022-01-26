@@ -29,7 +29,12 @@ void scale_test_teardown(void)
     ladel_sparse_free(M);
 }
 
-MU_TEST(test_scale_rows)
+struct TestScale : ::testing::Test  {
+    void SetUp() override { scale_test_setup(); }
+    void TearDown() override { scale_test_teardown(); }
+};
+
+TEST_F(TestScale, testScaleRows)
 {
     ladel_double row_scale[NROW] = {2, 0.5, -1, -3};
     ladel_scale_rows(M, row_scale);
@@ -47,7 +52,7 @@ MU_TEST(test_scale_rows)
 }
 
 
-MU_TEST(test_scale_columns)
+TEST_F(TestScale, testScaleColumns)
 {
     ladel_double col_scale[NCOL] = {-2, 0.5, 1.5, 5, 10};
     ladel_scale_columns(M, col_scale);
@@ -64,7 +69,7 @@ MU_TEST(test_scale_columns)
     mu_assert_double_eq(M->x[10], -5, TOL);
 }
 
-MU_TEST(test_scale_scalar)
+TEST_F(TestScale, testScaleScalar)
 {
     ladel_double s = 100;
     ladel_scale_scalar(M, s);
@@ -81,7 +86,7 @@ MU_TEST(test_scale_scalar)
     mu_assert_double_eq(M->x[10], -50, TOL);
 }
 
-MU_TEST(test_infinity_norm_rows)
+TEST_F(TestScale, testInfinityNormRows)
 {
     ladel_double norms[NROW];
     ladel_infinity_norm_rows(M, norms);
@@ -91,7 +96,7 @@ MU_TEST(test_infinity_norm_rows)
     mu_assert_double_eq(norms[3], 3.0, TOL);
 }
 
-MU_TEST(test_infinity_norm_columns)
+TEST_F(TestScale, testInfinityNormColumns)
 {
     ladel_double norms[NCOL];
     ladel_infinity_norm_columns(M, norms);
@@ -100,15 +105,4 @@ MU_TEST(test_infinity_norm_columns)
     mu_assert_double_eq(norms[2], 3.4, TOL);
     mu_assert_double_eq(norms[3], 1.7, TOL);
     mu_assert_double_eq(norms[4], 0.5, TOL);
-}
-
-MU_TEST_SUITE(suite_scale) 
-{
-    MU_SUITE_CONFIGURE(NULL, NULL, scale_test_setup, scale_test_teardown);
-
-    MU_RUN_TEST(test_scale_rows);
-    MU_RUN_TEST(test_scale_columns);
-    MU_RUN_TEST(test_scale_scalar);
-    MU_RUN_TEST(test_infinity_norm_rows);
-    MU_RUN_TEST(test_infinity_norm_columns);
 }

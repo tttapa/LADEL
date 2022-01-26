@@ -30,7 +30,12 @@ void matmat_suite_teardown(void)
     ladel_workspace_free(work);
 }
 
-MU_TEST(test_mat_diag_mat_transpose)
+struct TestMatMat : ::testing::Test {
+    void SetUp() override { matmat_suite_setup(); }
+    void TearDown() override { matmat_suite_teardown(); }
+};
+
+TEST_F(TestMatMat, testMatDiagMatTranspose)
 {
     ladel_sparse_matrix *M_transpose = ladel_transpose(M, TRUE, work);
     ladel_double diag[NCOL] = {1, 2, 3, 4, 5};
@@ -67,10 +72,4 @@ MU_TEST(test_mat_diag_mat_transpose)
 
     ladel_sparse_free(M_transpose);
     ladel_sparse_free(MMt);
-}
-
-MU_TEST_SUITE(suite_matmat)
-{
-    MU_SUITE_CONFIGURE(matmat_suite_setup, matmat_suite_teardown, NULL, NULL);
-    MU_RUN_TEST(test_mat_diag_mat_transpose);
 }

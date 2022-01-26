@@ -46,7 +46,13 @@ void permutation_test_setup(void)
     x[0] = 0; x[1] = 1; x[2] = 2; x[3] = 3; x[4] = 4; x[5] = 5; 
 }
 
-MU_TEST(test_permute_vector)
+
+struct TestPermutation : ::testing::Test {
+    void SetUp() override { permutation_suite_setup();permutation_test_setup(); }
+    void TearDown() override { permutation_suite_teardown(); }
+};
+
+TEST_F(TestPermutation, testPermuteVector)
 {
     ladel_int permutation_vector[NCOL] = {2, 0, 5, 3, 4, 1};
     ladel_permute_vector(x, permutation_vector, NCOL, y);
@@ -58,7 +64,7 @@ MU_TEST(test_permute_vector)
     mu_assert_double_eq(y[5], x[1], TOL);
 }
 
-MU_TEST(test_permute_inverse_vector)
+TEST_F(TestPermutation, testPermuteInverseVector)
 {
     ladel_int inverse_permutation_vector[NCOL] = {2, 0, 5, 3, 4, 1};
     ladel_inverse_permute_vector(x, inverse_permutation_vector, NCOL, y);
@@ -71,7 +77,7 @@ MU_TEST(test_permute_inverse_vector)
 }
 
 
-MU_TEST(test_permute_symmetric_matrix)
+TEST_F(TestPermutation, testPermuteSymmetricMatrix)
 {
     ladel_int permutation_vector[NCOL] = {2, 0, 5, 3, 4, 1};
     ladel_permute_symmetric_matrix(M, permutation_vector, Mpp, work);
@@ -94,7 +100,7 @@ MU_TEST(test_permute_symmetric_matrix)
     }
 }
 
-MU_TEST(test_permute_symmetric_matrix_without_permutation_vector)
+TEST_F(TestPermutation, testPermuteSymmetricMatrixWithoutPermutationPector)
 {
     ladel_permute_symmetric_matrix(M, NULL, Mpp, work);
     ladel_int index;
@@ -107,13 +113,4 @@ MU_TEST(test_permute_symmetric_matrix_without_permutation_vector)
         mu_assert_long_eq(Mpp->i[index], M->i[index]);
         mu_assert_double_eq(Mpp->x[index], M->x[index], TOL);
     }
-}
-
-MU_TEST_SUITE(suite_permutation)
-{
-    MU_SUITE_CONFIGURE(permutation_suite_setup, permutation_suite_teardown, permutation_test_setup, NULL);
-    MU_RUN_TEST(test_permute_vector);
-    MU_RUN_TEST(test_permute_inverse_vector);
-    MU_RUN_TEST(test_permute_symmetric_matrix);
-    MU_RUN_TEST(test_permute_symmetric_matrix_without_permutation_vector);
 }

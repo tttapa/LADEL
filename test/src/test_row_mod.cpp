@@ -73,8 +73,17 @@ void row_mod_test_teardown(void)
     
 }
 
-MU_TEST(test_row_add_at_the_end)
-{
+
+struct TestRowMod : ::testing::Test {
+    void SetUp() override { row_mod_suite_setup(); }
+    void TearDown() override { 
+        row_mod_test_teardown();
+        row_mod_suite_teardown();
+    }
+};
+
+TEST_F(TestRowMod, testRowAddAtTheEnd)
+{{
     /*Add a row to the end*/
     ladel_int status, index;
     status = ladel_factorize_advanced(M, sym, NO_ORDERING, &LD, Mbasis, work);
@@ -100,7 +109,7 @@ MU_TEST(test_row_add_at_the_end)
     for (index = 0; index < NCOL; index++) mu_assert_double_eq(x[index], sol_mod[index], TOL);
 }
 
-MU_TEST(test_row_del)
+// TEST_F(TestRowMod, testRowDel)
 {
     /*Delete the third row */ 
     ladel_int status, index;
@@ -118,7 +127,7 @@ MU_TEST(test_row_del)
     for (index = 0; index < NCOL; index++) mu_assert_double_eq(x[index], sol[index], TOL);
 }
 
-MU_TEST(test_row_add_in_middle)
+// TEST_F(TestRowMod, testRowAddInMiddle)
 {
     /* Add the third row back */
     new_row->x[0] = 6.893733655105202e-01; new_row->x[1] = 4.565212273616481e-01; 
@@ -142,12 +151,4 @@ MU_TEST(test_row_add_in_middle)
     ladel_double x[6];
     ladel_dense_solve(LD, rhs, x, work);
     for (index = 0; index < NCOL; index++) mu_assert_double_eq(x[index], sol[index], TOL);
-}
-
-MU_TEST_SUITE(suite_row_mod)
-{
-    MU_SUITE_CONFIGURE(row_mod_suite_setup, row_mod_suite_teardown, NULL, row_mod_test_teardown);
-    MU_RUN_TEST(test_row_add_at_the_end);
-    MU_RUN_TEST(test_row_del);
-    MU_RUN_TEST(test_row_add_in_middle); /*Note, this test depends on test_row_del*/
-}
+}}

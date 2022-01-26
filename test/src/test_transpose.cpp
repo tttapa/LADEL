@@ -26,7 +26,12 @@ void transpose_suite_teardown(void)
     ladel_sparse_free(M);
 }
 
-MU_TEST(test_transpose_with_values)
+struct TestTranspose : ::testing::Test {
+    void SetUp() override { transpose_suite_setup(); }
+    void TearDown() override { transpose_suite_teardown(); }
+};
+
+TEST_F(TestTranspose, testTransposeWithValues)
 {
     ladel_sparse_matrix *M_transpose = ladel_transpose(M, TRUE, work);
     ladel_int p_sol[NROW+1] = {0, 2, 3, 5, 7};
@@ -47,7 +52,7 @@ MU_TEST(test_transpose_with_values)
     ladel_sparse_free(M_transpose);
 }
 
-MU_TEST(test_transpose_no_values)
+TEST_F(TestTranspose, testTransposeNoValues)
 {
     ladel_sparse_matrix *M_transpose = ladel_transpose(M, FALSE, work);
     ladel_int p_sol[NROW+1] = {0, 2, 3, 5, 7};
@@ -67,11 +72,4 @@ MU_TEST(test_transpose_no_values)
     mu_assert_false(M_transpose->x);
 
     ladel_sparse_free(M_transpose);
-}
-
-MU_TEST_SUITE(suite_transpose)
-{
-    MU_SUITE_CONFIGURE(transpose_suite_setup, transpose_suite_teardown, NULL, NULL);
-    MU_RUN_TEST(test_transpose_with_values);
-    MU_RUN_TEST(test_transpose_no_values);
 }
