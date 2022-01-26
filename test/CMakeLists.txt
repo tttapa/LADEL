@@ -17,6 +17,7 @@ add_executable(ladel_run_all_tests
     "src/test_row_mod.cpp"
     "src/test_add.cpp"
     "src/test_submatrix.cpp"
+    "src/test_print.cpp"
 )
 
 target_include_directories(ladel_run_all_tests

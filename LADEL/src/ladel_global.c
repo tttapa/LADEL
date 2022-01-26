@@ -3,94 +3,90 @@
 #include "ladel_constants.h"
 #include "ladel_copy.h"
 #include "ladel_permutation.h"
+#include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-#ifdef MATLAB
-#include "mex.h"
-void* ladel_calloc(ladel_int n, size_t size)
-{
-    void *m = mxCalloc(LADEL_MAX(n, 1), size);
-    mexMakeMemoryPersistent(m);
-    return m;
+struct ladel_alloc_config_t {
+    calloc_sig *calloc;
+    malloc_sig *malloc;
+    realloc_sig *realloc;
+    free_sig *free;
+};
+
+static struct ladel_alloc_config_t ladel_alloc_config = {
+    .calloc = &calloc,
+    .malloc = &malloc,
+    .realloc = &realloc,
+    .free = &free,
+};
+
+calloc_sig *ladel_set_alloc_config_calloc(calloc_sig *calloc) {
+    assert(calloc);
+    calloc_sig *old = ladel_alloc_config.calloc;
+    ladel_alloc_config.calloc = calloc;
+    return old;
 }
 
-void *ladel_malloc(ladel_int n, size_t size) 
-{
-    void *m = mxMalloc(LADEL_MAX(n, 1) * size);
-    mexMakeMemoryPersistent(m);
-    return m;
+malloc_sig *ladel_set_alloc_config_malloc(malloc_sig *malloc) {
+    assert(malloc);
+    malloc_sig *old = ladel_alloc_config.malloc;
+    ladel_alloc_config.malloc = malloc;
+    return old;
 }
 
-void* ladel_realloc(void *p, ladel_int n, size_t size, ladel_int *status) 
-{
-    void *p_new = mxRealloc(p, LADEL_MAX(n, 1) * size);
-    *status = (p_new != NULL);
-    mexMakeMemoryPersistent(p_new);
-    return ((*status) ? p_new : p);
+realloc_sig *ladel_set_alloc_config_realloc(realloc_sig *realloc) {
+    assert(realloc);
+    realloc_sig *old = ladel_alloc_config.realloc;
+    ladel_alloc_config.realloc = realloc;
+    return old;
 }
 
-void *ladel_free(void* p) 
-{
-    if (p) mxFree(p);
+free_sig *ladel_set_alloc_config_free(free_sig *free) {
+    assert(free);
+    free_sig *old = ladel_alloc_config.free;
+    ladel_alloc_config.free = free;
+    return old;
+}
+
+void *ladel_malloc(ladel_int n, size_t size) {
+    return ladel_alloc_config.malloc(LADEL_MAX(n, 1) * size);
+}
+
+void *ladel_calloc(ladel_int n, size_t size) {
+    return ladel_alloc_config.calloc(LADEL_MAX(n, 1), size);
+}
+
+void *ladel_free(void *p) {
+    if (p)
+        ladel_alloc_config.free(p);
     return NULL;
 }
 
-#elif defined PYTHON
-#include <Python.h>
-void *ladel_malloc(ladel_int n, size_t size) 
-{
-    void *m = PyMem_Malloc(LADEL_MAX(n, 1) * size);
-    return m;
-} 
-void *ladel_free(void* p) 
-{
-    if (p) PyMem_Free(p);
-    return NULL;
-}
-void* ladel_realloc(void *p, ladel_int n, size_t size, ladel_int *status) 
-{
-    void *p_new = PyMem_Realloc(p, LADEL_MAX(n, 1) * size);
-    *status = (p_new != NULL);
-    return ((*status) ? p_new : p);
-}
-void* ladel_calloc(ladel_int n, size_t size)
-{
-    #if PY_MAJOR_VERSION >= 3
-    void *m = PyMem_Calloc(LADEL_MAX(n, 1), size);
-    #else
-    void *m = PyMem_Malloc(num * size);
-    memset(m, 0, num * size);
-    #endif
-    return m;
-}
-
-#else
-void *ladel_malloc(ladel_int n, size_t size) 
-{
-    return (malloc(LADEL_MAX(n, 1) * size));
-}
-
-void *ladel_calloc(ladel_int n, size_t size)
-{
-    return (calloc(LADEL_MAX(n, 1), size));
-}
-
-void *ladel_free(void* p) 
-{
-    if (p) free(p);
-    return NULL;
-}
-
-void *ladel_realloc(void *p, ladel_int n, size_t size, ladel_int *status)
-{
+void *ladel_realloc(void *p, ladel_int n, size_t size, ladel_int *status) {
     void *p_new;
-    p_new = realloc(p, LADEL_MAX(n, 1) * size);
+    p_new = ladel_alloc_config.realloc(p, LADEL_MAX(n, 1) * size);
     *status = (p_new != NULL);
-    return ((*status) ? p_new : p);
+    return (*status) ? p_new : p;
 }
 
-#endif /*MATLAB*/
+struct ladel_print_config_t {
+    printf_sig *printf;
+};
+static struct ladel_print_config_t ladel_print_config = {
+    .printf = &printf,
+};
+
+printf_sig *ladel_set_print_config_printf(printf_sig *printf) {
+    assert(printf);
+    printf_sig *old = ladel_print_config.printf;
+    ladel_print_config.printf = printf;
+    return old;
+}
+
+printf_sig *ladel_get_print_config_printf(void) {
+    return ladel_print_config.printf;
+}
 
 ladel_sparse_matrix *ladel_sparse_free(ladel_sparse_matrix *M)
 {
@@ -103,8 +99,8 @@ ladel_sparse_matrix *ladel_sparse_free(ladel_sparse_matrix *M)
 }
 
 ladel_sparse_matrix *ladel_sparse_alloc(ladel_int nrow, ladel_int ncol, 
-                                                ladel_int nzmax, ladel_int symmetry,
-                                                ladel_int values, ladel_int nz)
+                                        ladel_int nzmax, ladel_int symmetry,
+                                        ladel_int values, ladel_int nz)
 {
     ladel_sparse_matrix *M = (ladel_sparse_matrix *) ladel_calloc(1, sizeof(ladel_sparse_matrix));
     if (!M) return NULL;

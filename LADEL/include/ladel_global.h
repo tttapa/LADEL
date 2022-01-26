@@ -16,6 +16,20 @@ extern "C" {
 #include "ladel_copy.h"
 #include <stdlib.h>
 
+typedef void *(calloc_sig)(size_t, size_t);
+typedef void *(malloc_sig)(size_t);
+typedef void *(realloc_sig)(void *, size_t);
+typedef void (free_sig)(void *);
+
+/** Set the `calloc` function used by LADEL. */
+calloc_sig *ladel_set_alloc_config_calloc(calloc_sig *calloc);
+/** Set the `malloc` function used by LADEL. */
+malloc_sig *ladel_set_alloc_config_malloc(malloc_sig *malloc);
+/** Set the `realloc` function used by LADEL. */
+realloc_sig *ladel_set_alloc_config_realloc(realloc_sig *realloc);
+/** Set the `free` function used by LADEL. */
+free_sig *ladel_set_alloc_config_free(free_sig *free);
+
 /**
  * Version of malloc (for mex or for regular C).
  * 
@@ -64,13 +78,23 @@ void *ladel_realloc(void        *p,
                     size_t      size, 
                     ladel_int   *status);
 
-#ifdef MATLAB
-#include "mex.h"
-#define ladel_print mexPrintf
+#ifdef __GNUC__
+#define LADEL_ATTR_PRINTF_LIKE __attribute__((format(printf, 1, 2)))
 #else
-#include <stdio.h>
-#define ladel_print printf /**< Print function (for mex or for regular C) */
+#define LADEL_ATTR_PRINTF_LIKE
 #endif
+
+typedef LADEL_ATTR_PRINTF_LIKE int (printf_sig)(const char *, ...);
+
+/** Set the `printf` function used by LADEL. */
+printf_sig *ladel_set_print_config_printf(printf_sig *printf);
+/** Get the `printf` function used by LADEL. */
+printf_sig *ladel_get_print_config_printf(void);
+
+/**
+ * Print function.
+ */
+#define ladel_print ladel_get_print_config_printf()
 
 /**
  * Free a sparse matrix (and return NULL).
