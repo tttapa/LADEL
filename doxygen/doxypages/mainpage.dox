@@ -1,4 +1,4 @@
-/*! \mainpage LADEL: Sparse LDL factorization package with rank 1 and rowadd/rowdel updates 
+/*! \mainpage LADEL
  *
  * \section intro_sec Introduction
  *
@@ -7,7 +7,7 @@
  * \section install_sec Installation
  * See the instructions on the <a href=https://github.com/Benny44/LADEL>Readme</a>.
  * 
- * \section example Using LADEL (in matlab)
+ * \section example Using LADEL (in Matlab)
  * 
  * Using LADEL from Matlab is simple. Here is an example
  * \code{.unparsed}
@@ -31,6 +31,8 @@
  * Will be updated soon.
  * 
  * \section license License
+ * \subsection Subsection
+ * \subsubsection Subsubsection
  * 
  * LGPL 3.0
  */
