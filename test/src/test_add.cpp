@@ -3,7 +3,11 @@
 
 #define NROW 3
 #define NCOL 3
+#ifdef DFLOAT
+#define TOL 1e-5
+#else
 #define TOL 1e-8
+#endif
 
 static ladel_work *work;
 static ladel_sparse_matrix *A;

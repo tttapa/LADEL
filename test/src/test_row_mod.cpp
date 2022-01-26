@@ -9,7 +9,11 @@
 #define NCOL 6
 #define NROW 6
 #define NZMAX 21
+#ifdef DFLOAT
+#define TOL 1e-5
+#else
 #define TOL 1e-8
+#endif
 
 static ladel_work *work;
 static ladel_sparse_matrix *M, *Mbasis, *new_row;

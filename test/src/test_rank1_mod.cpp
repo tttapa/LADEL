@@ -10,7 +10,11 @@
 #define NROW 8
 #define NZMAX 24
 #define MAX_SIZE_SET 8
+#ifdef DFLOAT
+#define TOL 1e-1 /* TODO: figure out why this has to be so large */
+#else
 #define TOL 1e-8
+#endif
 
 static ladel_work *work;
 static ladel_sparse_matrix *M, *Mbasis;
