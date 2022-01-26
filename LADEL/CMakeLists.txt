@@ -9,6 +9,8 @@ option (LADEL_LONG
     "Use long long integers for indexing" On)
 option (LADEL_FLOAT
     "Use single precision instead of double" Off)
+option (LADEL_WITH_MEX
+    "Compile the MATLAB interface" Off)
 
 # Main LADEL library
 add_library(ladel
@@ -59,4 +61,9 @@ if (NOT LONG_LONG_SIZE EQUAL 8)
     message(WARNING "The C type long long does not appear to be 64 bits wide, "
                     "make sure that the integer types are compatible with "
                     "SuiteSparse.")
+endif()
+
+# MATLAB interface
+if (LADEL_WITH_MEX)
+    add_subdirectory(mex)
 endif()
