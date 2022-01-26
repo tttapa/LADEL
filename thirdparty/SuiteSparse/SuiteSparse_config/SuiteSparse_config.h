@@ -44,17 +44,27 @@ extern "C" {
 
 #include <limits.h>
 #include <stdlib.h>
-#include "ladel_types.h"
+#include <inttypes.h>
+
 /* ========================================================================== */
 /* === SuiteSparse_long ===================================================== */
 /* ========================================================================== */
 
 #ifndef SuiteSparse_long
 
-#define SuiteSparse_long long long
-#define SuiteSparse_long_max LONG_MAX
-#define SuiteSparse_long_idd "lld"
+#ifdef _WIN64
 
+#define SuiteSparse_long __int64
+#define SuiteSparse_long_max _I64_MAX
+#define SuiteSparse_long_idd "I64d"
+
+#else
+
+#define SuiteSparse_long long
+#define SuiteSparse_long_max LONG_MAX
+#define SuiteSparse_long_idd "ld"
+
+#endif
 #define SuiteSparse_long_id "%" SuiteSparse_long_idd
 #endif
 
@@ -119,28 +129,28 @@ void *SuiteSparse_free      /* always returns NULL */
 
 void SuiteSparse_tic    /* start the timer */
 (
-    ladel_double tic [2]      /* output, contents undefined on input */
+    double tic [2]      /* output, contents undefined on input */
 ) ;
 
-ladel_double SuiteSparse_toc  /* return time in seconds since last tic */
+double SuiteSparse_toc  /* return time in seconds since last tic */
 (
-    ladel_double tic [2]      /* input: from last call to SuiteSparse_tic */
+    double tic [2]      /* input: from last call to SuiteSparse_tic */
 ) ;
 
-ladel_double SuiteSparse_time  /* returns current wall clock time in seconds */
+double SuiteSparse_time  /* returns current wall clock time in seconds */
 (
     void
 ) ;
 
 /* returns sqrt (x^2 + y^2), computed reliably */
-ladel_double SuiteSparse_hypot (ladel_double x, ladel_double y) ;
+double SuiteSparse_hypot (double x, double y) ;
 
 /* complex division of c = a/b */
 int SuiteSparse_divcomplex
 (
-	ladel_double ar, ladel_double ai,	/* real and imaginary parts of a */
-	ladel_double br, ladel_double bi,	/* real and imaginary parts of b */
-	ladel_double *cr, ladel_double *ci	/* real and imaginary parts of c */
+    double ar, double ai,	/* real and imaginary parts of a */
+    double br, double bi,	/* real and imaginary parts of b */
+    double *cr, double *ci	/* real and imaginary parts of c */
 ) ;
 
 /* determine which timer to use, if any */
@@ -193,11 +203,11 @@ int SuiteSparse_version     /* returns SUITESPARSE_VERSION */
 */
 #define SUITESPARSE_HAS_VERSION_FUNCTION
 
-#define SUITESPARSE_DATE "Dec 28, 2018"
+#define SUITESPARSE_DATE "May 17, 2021"
 #define SUITESPARSE_VER_CODE(main,sub) ((main) * 1000 + (sub))
 #define SUITESPARSE_MAIN_VERSION 5
-#define SUITESPARSE_SUB_VERSION 4
-#define SUITESPARSE_SUBSUB_VERSION 0
+#define SUITESPARSE_SUB_VERSION 10
+#define SUITESPARSE_SUBSUB_VERSION 1
 #define SUITESPARSE_VERSION \
     SUITESPARSE_VER_CODE(SUITESPARSE_MAIN_VERSION,SUITESPARSE_SUB_VERSION)
 
