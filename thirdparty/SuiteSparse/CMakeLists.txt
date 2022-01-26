@@ -20,8 +20,14 @@ target_compile_definitions(suitesparse_config PUBLIC
     SuiteSparse_long=${INTEGER_TYPE_64}
     SuiteSparse_long_max=INT64_MAX
     SuiteSparse_long_idd=PRId64
-    "SuiteSparse_long_id=\"%\" PRId64"
 )
+if (MSVC)
+    target_compile_definitions(suitesparse_config PUBLIC
+        "SuiteSparse_long_id=\"%%\" PRId64")
+else()
+    target_compile_definitions(suitesparse_config PUBLIC
+        "SuiteSparse_long_id=\"%\" PRId64")
+endif()
 add_library(SuiteSparse::config ALIAS suitesparse_config)
 
 # SuiteSparse approximate minimal degree
