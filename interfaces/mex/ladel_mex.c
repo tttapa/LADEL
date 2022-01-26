@@ -19,12 +19,85 @@ static ladel_work* work = NULL;
 static ladel_symbolics *sym = NULL;
 static ladel_factor *LD = NULL;
 
+/* Use Mex's custom allocators */
+static void *ladel_mex_calloc(size_t n, size_t size) {
+    void *m = mxCalloc(n, size);
+    mexMakeMemoryPersistent(m);
+    return m;
+}
+static void *ladel_mex_malloc(size_t size) {
+    void *m = mxMalloc(size);
+    mexMakeMemoryPersistent(m);
+    return m;
+}
+static void* ladel_mex_realloc(void *p, size_t size) {
+    void *p_new = mxRealloc(p, size);
+    mexMakeMemoryPersistent(p_new);
+    return p_new;
+}
+static void ladel_mex_free(void* p) {
+    mxFree(p);
+}
+
+struct {
+    calloc_sig *calloc;
+    malloc_sig *malloc;
+    realloc_sig *realloc;
+    free_sig *free;
+    printf_sig *printf;
+} static old_config = {
+    .calloc = NULL,
+    .malloc = NULL,
+    .realloc = NULL,
+    .free = NULL,
+    .printf = NULL
+};
+
+static int config_configured = 0;
+
+static void configure_mex_specific_functions(void) {
+    if (config_configured)
+        return;
+    config_configured = 1;
+    old_config.calloc = ladel_set_alloc_config_calloc(&ladel_mex_calloc);
+    old_config.malloc = ladel_set_alloc_config_malloc(&ladel_mex_malloc);
+    old_config.realloc = ladel_set_alloc_config_realloc(&ladel_mex_realloc);
+    old_config.free = ladel_set_alloc_config_free(&ladel_mex_free);
+    old_config.printf = ladel_set_print_config_printf(&mexPrintf);
+}
+
+static void unconfigure_mex_specific_functions(void) {
+    if (old_config.calloc) {
+        ladel_set_alloc_config_calloc(old_config.calloc);
+        old_config.calloc = NULL;
+    }
+    if (old_config.malloc) {
+        ladel_set_alloc_config_malloc(old_config.malloc);
+        old_config.malloc = NULL;
+    }
+    if (old_config.realloc) {
+        ladel_set_alloc_config_realloc(old_config.realloc);
+        old_config.realloc = NULL;
+    }
+    if (old_config.free) {
+        ladel_set_alloc_config_free(old_config.free);
+        old_config.free = NULL;
+    }
+    if (old_config.printf) {
+        ladel_set_print_config_printf(old_config.printf);
+        old_config.printf = NULL;
+    }
+}
+
 /* Mex calls this when it closes unexpectedly, freeing the workspace */
 void exitFcn() {
   if (work != NULL) {
       ladel_workspace_free(work);
       work = NULL;
-  }  
+  }
+  if (config_configured) {
+      unconfigure_mex_specific_functions();
+  }
 }
 
 /**
@@ -53,6 +126,9 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
     
     /* Set function to call when mex closes unexpectedly */
     mexAtExit(exitFcn);
+
+    /* Set the custom allocator and print functions */
+    configure_mex_specific_functions();
 
     /* Get the command string */
     char cmd[64];

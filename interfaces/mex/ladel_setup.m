@@ -28,7 +28,7 @@ if (is64)
     flags = [flags ' -largeArrayDims'];
 end
 
-include = '-I. -I./include -I../../include -I../../amd/Include'; 
+include = '-I. -I./include -I../../LADEL/include -I../../thirdparty/SuiteSparse/SuiteSparse_config -I../../thirdparty/SuiteSparse/AMD/Include'; 
 
 ladel_src = { ...
     'ladel_col_counts.c', ...
@@ -53,7 +53,7 @@ ladel_src = { ...
     'ladel_upper_diag.c', ...
     };
 
-ladel_src_path = '../../src';
+ladel_src_path = '../../LADEL/src';
 for i = 1:length(ladel_src)
     ladel_src{i} = [ladel_src_path '/' ladel_src{i}] ;
 end
@@ -74,12 +74,20 @@ amd_src = { ...
     'amd_post_tree.c', ...
     'amd_preprocess.c', ...
     'amd_valid.c', ...
+    };
+
+amd_src_path = '../../thirdparty/SuiteSparse/AMD/Source';
+for i = 1:length(amd_src)
+    amd_src{i} = [amd_src_path '/' amd_src{i}];
+end
+
+ss_config_src = { ...
     'SuiteSparse_config.c', ...
     };
 
-amd_src_path = '../../amd/Source';
-for i = 1:length(amd_src)
-    amd_src{i} = [amd_src_path '/' amd_src{i}];
+ss_config_src_path = '../../thirdparty/SuiteSparse/SuiteSparse_config'
+for i = 1:length(ss_config_src)
+    ss_config_src{i} = [ss_config_src_path '/' ss_config_src{i}];
 end
 
 if (pc)
@@ -91,7 +99,7 @@ obj = '' ;
 
 cflags = ' CFLAGS="\$CFLAGS -std=c99 -fPIC -DMATLAB -DDAMD -DSIMPLE_COL_COUNTS -O3 -DDLONG"';
 flags = [flags cflags];
-source = [amd_src ladel_src ladel_mex_util_src];
+source = [ss_config_src amd_src ladel_src ladel_mex_util_src];
 kk = 0;
 for f = source
     ff = f {1} ;
