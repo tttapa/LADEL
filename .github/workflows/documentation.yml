@@ -64,8 +64,8 @@ jobs:
     - name: Generate documentation
       run: ./scripts/ci/gen-docs.sh /tmp/staging
       env:
-        CC: clang-10
-        CXX: clang++-10
+        CC: gcc-10
+        CXX: g++-10
         CMAKE_PREFIX_PATH: /tmp/gtest
 
     # Commit the new documentation, squash the commits, and push it to GitHub
