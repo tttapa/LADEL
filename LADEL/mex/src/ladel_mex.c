@@ -130,11 +130,14 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
     /* Set the custom allocator and print functions */
     configure_mex_specific_functions();
 
+    /* Ignore the self/obj pointer */
+    --nrhs;
+
     /* Get the command string */
     char cmd[64];
     
     // strcpy(factorize_advanced, "factorize_advanced");
-    if (nrhs < 1 || mxGetString(prhs[0], cmd, sizeof(cmd)))
+    if (nrhs < 1 || mxGetString(prhs[1], cmd, sizeof(cmd)))
 		mexErrMsgTxt("First input should be a command string less than 64 characters long.");
 
     if (strcmp(cmd, MODE_INIT) == 0) 
@@ -146,7 +149,7 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
         if (work != NULL)
             mexErrMsgTxt("Work is already initialized.");
 
-        ladel_int ncol = (ladel_int) *mxGetPr(prhs[1]);
+        ladel_int ncol = (ladel_int) *mxGetPr(prhs[2]);
         work = ladel_workspace_allocate(ncol);
         sym = ladel_symbolics_alloc(ncol);
         return;
@@ -172,7 +175,7 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
 
         plhs[0] = mxCreateDoubleMatrix(LD->ncol,1,mxREAL);
         ladel_double *y = mxGetPr(plhs[0]); 
-        ladel_double *x = mxGetPr(prhs[1]); 
+        ladel_double *x = mxGetPr(prhs[2]); 
         ladel_dense_solve(LD, x, y, work);
 
         return;
@@ -214,8 +217,8 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
         if (LD == NULL)
             mexErrMsgTxt("Row_mod: No factor found. First use factorize_advanced to compute L and D.");
 
-        ladel_int* rows_in_L = (ladel_int*) mxGetData(prhs[1]);
-        ladel_int nb_rows = (ladel_int) mxGetScalar(prhs[2]);
+        ladel_int* rows_in_L = (ladel_int*) mxGetData(prhs[2]);
+        ladel_int nb_rows = (ladel_int) mxGetScalar(prhs[3]);
         
         ladel_int status, index;
         if (nrhs == 3)
@@ -230,10 +233,10 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
         else if (nrhs == 5)
         {
             ladel_sparse_matrix Wmatlab;
-            ladel_sparse_matrix *W = ladel_get_sparse_from_matlab(prhs[3], &Wmatlab, UNSYMMETRIC);
+            ladel_sparse_matrix *W = ladel_get_sparse_from_matlab(prhs[4], &Wmatlab, UNSYMMETRIC);
             /* To not modify the matlab argument in place, we have to copy it */
             ladel_sparse_matrix *W_copy = ladel_sparse_allocate_and_copy(W);
-            ladel_double* diag = mxGetPr(prhs[4]);
+            ladel_double* diag = mxGetPr(prhs[5]);
 
             for (index = 0; index < nb_rows; index++)
             {
@@ -256,10 +259,10 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
         if (LD != NULL) LD = ladel_factor_free(LD);
 
         ladel_sparse_matrix Mmatlab;
-        ladel_sparse_matrix *M = ladel_get_sparse_from_matlab(prhs[1], &Mmatlab, UPPER);
+        ladel_sparse_matrix *M = ladel_get_sparse_from_matlab(prhs[2], &Mmatlab, UPPER);
         ladel_int ordering;
         if (nrhs == 3)
-            ordering = (ladel_int) *mxGetPr(prhs[2]);
+            ordering = (ladel_int) *mxGetPr(prhs[3]);
         else
             ordering = NO_ORDERING;
         
@@ -277,14 +280,14 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
         if (LD != NULL) LD = ladel_factor_free(LD);
 
         ladel_sparse_matrix Mmatlab;
-        ladel_sparse_matrix *M = ladel_get_sparse_from_matlab(prhs[1], &Mmatlab, UPPER);
+        ladel_sparse_matrix *M = ladel_get_sparse_from_matlab(prhs[2], &Mmatlab, UPPER);
 
         ladel_sparse_matrix Mbasismatlab;
-        ladel_sparse_matrix *Mbasis = ladel_get_sparse_from_matlab(prhs[2], &Mbasismatlab, UPPER);
+        ladel_sparse_matrix *Mbasis = ladel_get_sparse_from_matlab(prhs[3], &Mbasismatlab, UPPER);
 
         ladel_int ordering;
         if (nrhs == 4)
-            ordering = (ladel_int) *mxGetPr(prhs[3]);
+            ordering = (ladel_int) *mxGetPr(prhs[4]);
         else
             ordering = NO_ORDERING;
         
@@ -301,7 +304,7 @@ void mexFunction(int nlhs, mxArray * plhs [], int nrhs, const mxArray * prhs [])
             mexErrMsgTxt("Wrong number of input or output arguments for mode factorize_with_prior_basis.");
 
         ladel_sparse_matrix Mmatlab;
-        ladel_sparse_matrix *M = ladel_get_sparse_from_matlab(prhs[1], &Mmatlab, UPPER);
+        ladel_sparse_matrix *M = ladel_get_sparse_from_matlab(prhs[2], &Mmatlab, UPPER);
        
         ladel_int status = ladel_factorize_with_prior_basis(M, sym, LD, work);
         if (status != SUCCESS)

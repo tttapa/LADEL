@@ -14,30 +14,33 @@ classdef ladel < handle
     methods
         
         %% Constructor - Create a new solver instance
-        function this = ladel(ncol)
-            ladel_mex('init', ncol);
+        function obj = ladel(ncol)
+            obj.ladel_mex('init', ncol);
+        end
+
+        %% Mex function
+        varargout = ladel_mex(obj, varargin)
+        
+        function delete(obj)
+            obj.ladel_mex('delete');
         end
         
-        function delete(~)
-            ladel_mex('delete');
-        end
-        
-        function varargout = factorize(~, M, varargin)
+        function varargout = factorize(obj, M, varargin)
             M = triu(M);
             if nargin == 3
                 ordering = varargin{1};
-                ladel_mex('factorize', M, ordering);
+                obj.ladel_mex('factorize', M, ordering);
             else
-                ladel_mex('factorize', M);
+                obj.ladel_mex('factorize', M);
             end
             
             if nargout > 0
                 if nargout == 2
-                    [L, D] = ladel_mex('return');
+                    [L, D] = obj.ladel_mex('return');
                     varargout{1} = L;
                     varargout{2} = D;
                 elseif nargout == 3
-                    [L, D, p] = ladel_mex('return');
+                    [L, D, p] = obj.ladel_mex('return');
                     varargout{1} = L;
                     varargout{2} = D;
                     varargout{3} = p;
@@ -47,27 +50,27 @@ classdef ladel < handle
             end
         end
         
-        function y = dense_solve(~, x)
-            y = ladel_mex('solve', x);
+        function y = dense_solve(obj, x)
+            y = obj.ladel_mex('solve', x);
         end
         
-        function varargout = factorize_advanced(~, M, Mbasis, varargin)
+        function varargout = factorize_advanced(obj, M, Mbasis, varargin)
             M = triu(M);
             Mbasis = triu(Mbasis);
             if nargin == 4
                 ordering = varargin{1};
-                ladel_mex('factorize_advanced', M, Mbasis, ordering);
+                obj.ladel_mex('factorize_advanced', M, Mbasis, ordering);
             else
-                ladel_mex('factorize_advanced', M, Mbasis);
+                obj.ladel_mex('factorize_advanced', M, Mbasis);
             end
             
             if nargout > 0
                 if nargout == 2
-                    [L, D] = ladel_mex('return');
+                    [L, D] = obj.ladel_mex('return');
                     varargout{1} = L;
                     varargout{2} = D;
                 elseif nargout == 3
-                    [L, D, p] = ladel_mex('return');
+                    [L, D, p] = obj.ladel_mex('return');
                     varargout{1} = L;
                     varargout{2} = D;
                     varargout{3} = p;
@@ -78,16 +81,16 @@ classdef ladel < handle
                     
         end
         
-        function varargout = factorize_with_prior_basis(~, M)
+        function varargout = factorize_with_prior_basis(obj, M)
             M = triu(M);         
-            ladel_mex('factorize_with_prior_basis', M);
+            obj.ladel_mex('factorize_with_prior_basis', M);
             if nargout > 0
                 if nargout == 2
-                    [L, D] = ladel_mex('return');
+                    [L, D] = obj.ladel_mex('return');
                     varargout{1} = L;
                     varargout{2} = D;
                 elseif nargout == 3
-                    [L, D, p] = ladel_mex('return');
+                    [L, D, p] = obj.ladel_mex('return');
                     varargout{1} = L;
                     varargout{2} = D;
                     varargout{3} = p;
@@ -97,26 +100,26 @@ classdef ladel < handle
             end 
         end
         
-        function varargout = row_mod(~, row, varargin)
+        function varargout = row_mod(obj, row, varargin)
             
             if nargin ~= 2 && nargin ~= 4
                 error('Wrong number of input arguments for row_mod.\n Use .row_mod(row) to delete a row (with index row) or .row_mod(row, w, diag_elem) to add a row w and with on the diagonal diag_elem.\n');
             end
             if nargin == 2
-                ladel_mex('rowmod', int64(row), length(row));
+                obj.ladel_mex('rowmod', int64(row), length(row));
             else
                 w = varargin{1};
                 diag_elem = varargin{2};
-                ladel_mex('rowmod', int64(row), length(row), w, diag_elem);
+                obj.ladel_mex('rowmod', int64(row), length(row), w, diag_elem);
             end
             
             if nargout > 0
                 if nargout == 2
-                    [L, D] = ladel_mex('return');
+                    [L, D] = obj.ladel_mex('return');
                     varargout{1} = L;
                     varargout{2} = D;
                 elseif nargout == 3
-                    [L, D, p] = ladel_mex('return');
+                    [L, D, p] = obj.ladel_mex('return');
                     varargout{1} = L;
                     varargout{2} = D;
                     varargout{3} = p;

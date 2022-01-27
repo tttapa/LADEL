@@ -1,5 +1,5 @@
 %% Demo on how to use LADEL (without permutation)
-if exist('solver')
+if exist('solver', 'var')
     solver.delete();
     clear solver
 end

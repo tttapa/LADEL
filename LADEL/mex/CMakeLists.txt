@@ -22,6 +22,7 @@ endif()
 
 # Install the final MEX file
 install(FILES $<TARGET_FILE:ladel_mex>
+        ladel.m
         EXCLUDE_FROM_ALL
         COMPONENT mex_interface
-        DESTINATION .)
+        DESTINATION @ladel)
