@@ -39,7 +39,9 @@ extern "C" {
 #include "ladel_submatrix.h"
 
 /**
- * @name Main solver API
+ * @defgroup grp-solver Solver
+ * @brief   Main solver API.
+ * @see @ref ladel.h
  * @{
  */
 
@@ -171,8 +173,8 @@ ladel_int ladel_dense_solve(const ladel_factor  *LD,
 /**
  * Updates an @f$LDL^T@f$ factorization.
  * 
- * If LD contains the factors of @f$M@f$ on input, LD will contain the factors of @f$M + up\textunderscore or\textunderscore down*factor^2*ww^T,@f$
- * where @f$w = W(:, col\textunderscore in\textunderscore W).@f$
+ * If LD contains the factors of @f$M@f$ on input, LD will contain the factors of @f$M + up\_or\_down*factor^2*ww^T,@f$
+ * where @f$w = W(:, col\_in\_W).@f$
  * 
  * @param LD                Factors of an @f$LDL^T@f$ factorization
  * @param sym               Associated symbolic information
@@ -204,8 +206,8 @@ ladel_int ladel_rank1_update(   ladel_factor        *LD,
  * M_{11}   & m_{12} & M_{13}   \\
  * m_{12}^T & m_{22} & m_{32}^T \\
  * M_{13}^T & m_{32} & M_{33}
- * \end{bmatrix} @f$ on output, where @f$m = W(:, col\textunderscore in\textunderscore W),@f$ and 
- * @f$row\textunderscore in\textunderscore L = n + 1@f$ with @f$[n,n] = size(M_{11}).@f$
+ * \end{bmatrix} @f$ on output, where @f$m = W(:, col\_in\_ W),@f$ and 
+ * @f$row\_in\_L = n + 1@f$ with @f$[n,n] = size(M_{11}).@f$
  * 
  * @param LD                Factors of an @f$LDL^T@f$ factorization
  * @param sym               Associated symbolic information
@@ -238,7 +240,7 @@ ladel_int ladel_row_add(ladel_factor        *LD,
  * 0        & 1 & 0      \\
  * M_{13}^T & 0 & M_{33}
  * \end{bmatrix} @f$ on output, where 
- * @f$row\textunderscore in\textunderscore L = n + 1@f$ with @f$[n,n] = size(M_{11}).@f$
+ * @f$row\_in\_L = n + 1@f$ with @f$[n,n] = size(M_{11}).@f$
  * 
  * @param LD                Factors of an @f$LDL^T@f$ factorization
  * @param sym               Associated symbolic information

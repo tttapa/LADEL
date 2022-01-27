@@ -12,7 +12,8 @@ extern "C" {
 #endif 
 
 /**
- * @name Constants
+ * @defgroup grp-constants Constants
+ * @brief   Constants that can be passed to functions.
  * @{
  */
 
@@ -48,7 +49,8 @@ extern "C" {
  */
 
 /**
- * @name Macros
+ * @defgroup grp-macros Macros
+ * @brief   Utility macros.
  * @{
  */
 
