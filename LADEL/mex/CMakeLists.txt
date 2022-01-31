@@ -7,14 +7,18 @@ add_library(matlab_mex_headers INTERFACE)
 target_include_directories(matlab_mex_headers SYSTEM 
     INTERFACE ${Matlab_INCLUDE_DIRS})
 
+# Compile the utility library
+add_library(mex_util OBJECT src/ladel_mex_util.c)
+target_link_libraries(mex_util PUBLIC ladel::ladel matlab_mex_headers)
+target_include_directories(mex_util PUBLIC include)
+add_library(ladel::mex_util ALIAS mex_util)
+
 # Create a target for compiling a MEX function:
 matlab_add_mex(
     NAME ladel_mex                    # Name for use in Matlab
     SRC src/ladel_mex.c               # Source files to compile
-        src/ladel_mex_util.c          #
-    LINK_TO ladel::ladel              # Dependencies
+    LINK_TO ladel::mex_util           # Dependencies
 )
-target_include_directories(ladel_mex PRIVATE include)
 if (NOT WIN32)
     # Matlab's C++ standard library is too old, so link it statically:
     target_link_options(ladel_mex PUBLIC -static-libstdc++ -static-libgcc)
