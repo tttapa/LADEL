@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.17)
 project(LADEL_suitesparse)
 
 # Find the 64-bit signed integer type in C (usually long on Linux, long long on
