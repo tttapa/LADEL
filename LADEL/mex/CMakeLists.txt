@@ -19,7 +19,7 @@ matlab_add_mex(
     SRC src/ladel_mex.c               # Source files to compile
     LINK_TO LADEL::mex_util           # Dependencies
 )
-if (NOT WIN32)
+if (NOT WIN32 AND NOT APPLE)
     # Matlab's C++ standard library is too old, so link it statically:
     target_link_options(ladel_mex PUBLIC -static-libstdc++ -static-libgcc)
 endif()
