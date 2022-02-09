@@ -53,6 +53,8 @@ if (LADEL_USE_AMD)
     add_subdirectory(../thirdparty/SuiteSparse SuiteSparse EXCLUDE_FROM_ALL)
     target_link_libraries(ladel PRIVATE ladel_amd)
 endif()
+# TODO: this is probably too much
+set_target_properties(ladel PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS True)
 add_library(${PROJECT_NAME}::ladel ALIAS ladel)
 
 # Sanity check
