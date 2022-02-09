@@ -11,26 +11,33 @@ if (NOT INTEGER_TYPE_64)
 endif()
 
 # SuiteSparse config
-add_library(suitesparse_config
-    "SuiteSparse_config/SuiteSparse_config.c"
-)
-target_include_directories(suitesparse_config PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/SuiteSparse_config)
-target_compile_definitions(suitesparse_config PUBLIC
+add_library(suitesparse_config-headers INTERFACE)
+target_compile_definitions(suitesparse_config-headers INTERFACE
     SuiteSparse_long=${INTEGER_TYPE_64}
     SuiteSparse_long_max=INT64_MAX
     SuiteSparse_long_idd=PRId64
 )
+target_include_directories(suitesparse_config-headers INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/SuiteSparse_config>)
 if (MSVC)
-    target_compile_definitions(suitesparse_config PUBLIC
+    target_compile_definitions(suitesparse_config-headers INTERFACE
         "SuiteSparse_long_id=\"%%\" PRId64")
 else()
-    target_compile_definitions(suitesparse_config PUBLIC
+    target_compile_definitions(suitesparse_config-headers INTERFACE
         "SuiteSparse_long_id=\"%\" PRId64")
 endif()
-add_library(SuiteSparse::config ALIAS suitesparse_config)
+
+add_library(suitesparse_config-obj OBJECT
+    "SuiteSparse_config/SuiteSparse_config.c")
+target_link_libraries(suitesparse_config-obj PUBLIC suitesparse_config-headers)
+set_target_properties(suitesparse_config-obj PROPERTIES C_VISIBILITY_PRESET hidden)
 
 # SuiteSparse approximate minimal degree
+add_library(amd-headers INTERFACE)
+target_include_directories(amd-headers INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/AMD/Include>)
+target_link_libraries(amd-headers INTERFACE suitesparse_config-headers)
+
 set(AMD_SOURCES
     "AMD/Source/amd_1.c"
     "AMD/Source/amd_2.c"
@@ -47,18 +54,21 @@ set(AMD_SOURCES
     "AMD/Source/amd_valid.c"
 )
 # Compile as integer version
-add_library(amd_c_int OBJECT ${AMD_SOURCES})
-target_include_directories(amd_c_int PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/AMD/Include)
-target_link_libraries(amd_c_int PUBLIC SuiteSparse::config)
-target_compile_definitions(amd_c_int PRIVATE DINT)
+add_library(amd_c_int-obj OBJECT ${AMD_SOURCES})
+target_link_libraries(amd_c_int-obj PUBLIC amd-headers)
+target_link_libraries(amd_c_int-obj PUBLIC suitesparse_config-obj)
+target_compile_definitions(amd_c_int-obj PRIVATE DINT)
+set_target_properties(amd_c_int-obj PROPERTIES C_VISIBILITY_PRESET hidden)
+
 # Compile as long (or long long) version
-add_library(amd_c_long OBJECT ${AMD_SOURCES})
-target_include_directories(amd_c_long PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/AMD/Include)
-target_link_libraries(amd_c_long PUBLIC SuiteSparse::config)
-target_compile_definitions(amd_c_long PRIVATE DLONG)
+add_library(amd_c_long-obj OBJECT ${AMD_SOURCES})
+target_link_libraries(amd_c_long-obj PUBLIC amd-headers)
+target_link_libraries(amd_c_long-obj PUBLIC suitesparse_config-obj)
+target_compile_definitions(amd_c_long-obj PRIVATE DLONG)
+set_target_properties(amd_c_long-obj PROPERTIES C_VISIBILITY_PRESET hidden)
+
 # Link both versions
-add_library(amd_c)
-target_link_libraries(amd_c PUBLIC amd_c_int amd_c_long)
-add_library(SuiteSparse::amd ALIAS amd_c)
+add_library(ladel_amd STATIC $<TARGET_OBJECTS:amd_c_int-obj>
+                             $<TARGET_OBJECTS:amd_c_long-obj>
+                             $<TARGET_OBJECTS:suitesparse_config-obj>)
+target_link_libraries(ladel_amd INTERFACE amd-headers)

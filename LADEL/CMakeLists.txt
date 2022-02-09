@@ -13,7 +13,7 @@ option (LADEL_WITH_MEX
     "Compile the MATLAB interface" Off)
 
 # Main LADEL library
-add_library(ladel
+add_library(ladel 
     "src/ladel_debug_print.c"
     "src/ladel_scale.c"
     "src/ladel_upper_diag.c"
@@ -38,11 +38,6 @@ add_library(ladel
 target_include_directories(ladel
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
            $<INSTALL_INTERFACE:include>)
-if (LADEL_USE_AMD)
-    target_compile_definitions(ladel PUBLIC DAMD)
-    add_subdirectory(../thirdparty/SuiteSparse SuiteSparse EXCLUDE_FROM_ALL)
-    target_link_libraries(ladel PRIVATE SuiteSparse::amd)
-endif()
 if (LADEL_SIMPLE_COL_COUNTS)
     target_compile_definitions(ladel PUBLIC SIMPLE_COL_COUNTS)
 endif()
@@ -52,7 +47,13 @@ endif()
 if (LADEL_FLOAT)
     target_compile_definitions(ladel PUBLIC DFLOAT)
 endif()
-add_library(ladel::ladel ALIAS ladel)
+
+if (LADEL_USE_AMD)
+    target_compile_definitions(ladel PUBLIC DAMD)
+    add_subdirectory(../thirdparty/SuiteSparse SuiteSparse EXCLUDE_FROM_ALL)
+    target_link_libraries(ladel PRIVATE ladel_amd)
+endif()
+add_library(${PROJECT_NAME}::ladel ALIAS ladel)
 
 # Sanity check
 include(CheckTypeSize)
@@ -67,3 +68,17 @@ endif()
 if (LADEL_WITH_MEX)
     add_subdirectory(mex)
 endif()
+
+# Installation
+include(cmake/Install.cmake)
+
+# Packaging
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/../LICENSE")
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../README.md")
+SET(CPACK_GENERATOR "DEB;TGZ")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Pieter P")
+include(CPack)
