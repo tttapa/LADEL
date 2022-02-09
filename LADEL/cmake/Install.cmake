@@ -3,12 +3,19 @@ include(GNUInstallDirs)
 set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/ladel")
 
 # Add the ladel library to the "export-set", install the library files
-install(TARGETS ladel ladel_amd amd-headers suitesparse_config-headers
-    EXPORT ladelTargets
+install(TARGETS ladel EXPORT ladelTargets
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
         COMPONENT shlib
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" 
         COMPONENT lib)
+if (LADEL_USE_AMD)
+    install(TARGETS ladel_amd amd-headers suitesparse_config-headers 
+        EXPORT ladelTargets
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+            COMPONENT shlib
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" 
+            COMPONENT lib)
+endif()
 
 # Install the header files
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
