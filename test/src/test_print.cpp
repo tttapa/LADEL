@@ -53,4 +53,5 @@ TEST(Print, redirectPrint) {
         "1.1250000000000000e+00;M(4, 4) = 1.7500000000000000e+00;M(1, 5) = "
         "5.0000000000000000e-01;M(4, 5) = -5.0000000000000000e-01;\n";
     EXPECT_STREQ(buffer, expected);
+    ladel_sparse_free(M);
 }

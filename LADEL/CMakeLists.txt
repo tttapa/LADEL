@@ -5,10 +5,10 @@ option (LADEL_SIMPLE_COL_COUNTS
     "Simplify symbolic analysis (worse asymptotic time complexity)" On)
 option (LADEL_USE_AMD
     "Use approximate minimum degree ordering" On)
-option (LADEL_LONG
-    "Use long long integers for indexing" On)
-option (LADEL_FLOAT
-    "Use single precision instead of double" Off)
+option (LADEL_64BIT_INDICES
+    "Use 64-bit integers for indexing" On)
+option (LADEL_SINGLE_PRECISION
+    "Use single precision floats instead of double" Off)
 option (LADEL_WITH_MEX
     "Compile the MATLAB interface" Off)
 
@@ -46,11 +46,11 @@ endif()
 if (LADEL_SIMPLE_COL_COUNTS)
     target_compile_definitions(ladel PUBLIC SIMPLE_COL_COUNTS)
 endif()
-if (LADEL_LONG)
-    target_compile_definitions(ladel PUBLIC DLONG)
+if (LADEL_64BIT_INDICES)
+    target_compile_definitions(ladel PUBLIC LADEL_64BIT_INDICES)
 endif()
-if (LADEL_FLOAT)
-    target_compile_definitions(ladel PUBLIC DFLOAT)
+if (LADEL_SINGLE_PRECISION)
+    target_compile_definitions(ladel PUBLIC LADEL_SINGLE_PRECISION)
 endif()
 add_library(ladel::ladel ALIAS ladel)
 

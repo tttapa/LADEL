@@ -22,9 +22,9 @@ ladel_int ladel_ldl_symbolic(ladel_sparse_matrix *M, ladel_symbolics *sym, ladel
         ladel_int status;
         double Info [AMD_INFO];
 
-        #ifdef DLONG
+        #ifdef LADEL_64BIT_INDICES
         status = amd_l_order(M->ncol, M->p, M->i, sym->p, NULL, Info);
-        #else /*DLONG*/
+        #else /*LADEL_64BIT_INDICES*/
         status = amd_order(M->ncol, M->p, M->i, sym->p, NULL, Info);
         #endif
         if (status != AMD_OK) return FAIL;

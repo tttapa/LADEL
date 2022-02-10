@@ -9,18 +9,23 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
-#ifdef DFLOAT
+#include <stdint.h>
+#include <inttypes.h>
+
+#ifdef LADEL_SINGLE_PRECISION
     typedef float ladel_double; /**< Type for floating point numbers (default: double) */
 #else
     typedef double ladel_double; /**< Type for floating point numbers (default: double) */
 #endif
 
-#ifdef DLONG
-    typedef long long ladel_int; /**< Type for integer numbers (default: long long) */
+#ifdef LADEL_64BIT_INDICES
+    typedef int64_t ladel_int; /**< Type for integer numbers (default: int64_t) */
+#   define LADEL_PRIi PRId64
 #else
-    typedef int ladel_int; /**< Type for integer numbers (default: long long) */
+    typedef int32_t ladel_int; /**< Type for integer numbers (default: int64_t) */
+#   define LADEL_PRIi PRId32
 #endif
 
 /**

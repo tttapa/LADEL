@@ -10,7 +10,7 @@
 #define NROW 8
 #define NZMAX 24
 #define MAX_SIZE_SET 8
-#ifdef DFLOAT
+#ifdef LADEL_SINGLE_PRECISION
 #define TOL 1e-1 /* TODO: figure out why this has to be so large */
 #else
 #define TOL 1e-8

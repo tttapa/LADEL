@@ -4,7 +4,7 @@
 #define NROW 4
 #define NCOL 5
 #define NZMAX 9
-#ifdef DFLOAT
+#ifdef LADEL_SINGLE_PRECISION
 #define TOL 1e-5
 #else
 #define TOL 1e-8

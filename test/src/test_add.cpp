@@ -3,7 +3,7 @@
 
 #define NROW 3
 #define NCOL 3
-#ifdef DFLOAT
+#ifdef LADEL_SINGLE_PRECISION
 #define TOL 1e-5
 #else
 #define TOL 1e-8
