@@ -1,0 +1,7 @@
+<map id="ladel_symbolics_alloc" name="ladel_symbolics_alloc">
+<area shape="rect" id="node1" title="Allocate a symbolics struct." alt="" coords="5,56,171,83"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a15a407b5c8ad9de2faeb93fcd786e099" title="Version of calloc (for mex or for regular C)." alt="" coords="249,5,348,32"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="246,56,351,83"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a3afc380b3f7bf00640c0bc66590b5702" title="Free a symbolics struct (and return NULL)." alt="" coords="219,107,379,133"/>
+<area shape="rect" id="node5" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="427,107,513,133"/>
+</map>

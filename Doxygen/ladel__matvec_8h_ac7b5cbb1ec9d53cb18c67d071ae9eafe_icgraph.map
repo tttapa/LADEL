@@ -1,0 +1,4 @@
+<map id="ladel_tpose_matvec" name="ladel_tpose_matvec">
+<area shape="rect" id="node1" title="Computes &#160;or &#160;(for reset==TRUE of FALSE respectively)." alt="" coords="240,5,393,32"/>
+<area shape="rect" id="node2" href="$ladel__matvec_8c.html#acdb4ece6f8c40943119695bc2a02464a" title="Computes (for a symmetric matrix M) &#160;or &#160;(for reset==TRUE of FALSE respectively)." alt="" coords="5,5,192,32"/>
+</map>

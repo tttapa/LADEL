@@ -1,0 +1,9 @@
+<map id="ladel_mat_mat_transpose_pattern" name="ladel_mat_mat_transpose_pattern">
+<area shape="rect" id="node1" title="Computes the pattern of ." alt="" coords="5,49,196,90"/>
+<area shape="rect" id="node2" href="$ladel__matmat_8c.html#aa0dc5e49d5b89cd8756da8d19c19fffa" title="Core mat_mat_transpose function with all options (diag and value/pattern)." alt="" coords="244,49,435,90"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#a6e485045ec098c0b5a9afe07875a1e59" title="Allocate a sparse matrix." alt="" coords="483,56,625,83"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a15a407b5c8ad9de2faeb93fcd786e099" title="Version of calloc (for mex or for regular C)." alt="" coords="693,5,791,32"/>
+<area shape="rect" id="node5" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="689,56,795,83"/>
+<area shape="rect" id="node6" href="$ladel__global_8c.html#afaa07a7aa3c8517d3853968448b398a0" title="Free a sparse matrix (and return NULL)." alt="" coords="673,107,811,133"/>
+<area shape="rect" id="node7" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="859,107,945,133"/>
+</map>

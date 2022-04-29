@@ -1,0 +1,12 @@
+<map id="LADEL/src/ladel_col_counts.c" name="LADEL/src/ladel_col_counts.c">
+<area shape="rect" id="node1" title=" " alt="" coords="311,5,460,47"/>
+<area shape="rect" id="node2" href="$ladel__types_8h.html" title="Structures and types used in LADEL routines." alt="" coords="397,319,507,345"/>
+<area shape="rect" id="node5" href="$ladel__constants_8h.html" title="Constants and macros used in LADEL." alt="" coords="5,244,141,271"/>
+<area shape="rect" id="node6" href="$ladel__transpose_8h.html" title="Routine to compute the transpose of a matrix." alt="" coords="541,169,678,196"/>
+<area shape="rect" id="node7" href="$ladel__global_8h.html" title="Memory allocation routines." alt="" coords="201,169,314,196"/>
+<area shape="rect" id="node10" href="$ladel__debug__print_8h.html" title="Routines to print out matrices and vectors." alt="" coords="310,95,461,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="366,393,437,420"/>
+<area shape="rect" id="node4" title=" " alt="" coords="461,393,547,420"/>
+<area shape="rect" id="node8" href="$ladel__copy_8h.html" title="Routines to copy matrices and vectors." alt="" coords="311,244,414,271"/>
+<area shape="rect" id="node9" title=" " alt="" coords="217,244,287,271"/>
+</map>

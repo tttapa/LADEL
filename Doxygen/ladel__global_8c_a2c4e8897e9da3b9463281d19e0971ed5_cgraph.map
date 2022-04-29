@@ -1,0 +1,5 @@
+<map id="ladel_factor_free" name="ladel_factor_free">
+<area shape="rect" id="node1" title="Free a factor." alt="" coords="5,5,137,32"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="371,5,457,32"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#afaa07a7aa3c8517d3853968448b398a0" title="Free a sparse matrix (and return NULL)." alt="" coords="185,31,323,57"/>
+</map>

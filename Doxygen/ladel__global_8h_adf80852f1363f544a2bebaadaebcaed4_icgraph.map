@@ -1,0 +1,6 @@
+<map id="ladel_set_free" name="ladel_set_free">
+<area shape="rect" id="node1" title="Free a set." alt="" coords="456,31,571,57"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a7c28f9d8aba3a477eb86d0e37084c504" title="Allocate a set struct." alt="" coords="256,5,396,32"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a0c1ec6da7994389ca70fd3d89ff28619" title="Free a LADEL workspace." alt="" coords="244,56,408,83"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#a960504daceae6c5129487e2bd2573c94" title="Allocate a LADEL workspace." alt="" coords="5,31,196,57"/>
+</map>

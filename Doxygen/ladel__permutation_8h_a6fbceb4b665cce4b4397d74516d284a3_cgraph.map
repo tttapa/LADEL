@@ -1,0 +1,5 @@
+<map id="ladel_permute_symmetric_matrix" name="ladel_permute_symmetric_matrix">
+<area shape="rect" id="node1" title="Compute ." alt="" coords="5,5,199,47"/>
+<area shape="rect" id="node2" href="$ladel__copy_8c.html#a97ad68065f3cb0241e4a6427e2e196a7" title="Copies a matrix (preallocated)" alt="" coords="247,13,389,39"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="437,13,524,39"/>
+</map>

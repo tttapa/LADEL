@@ -1,0 +1,9 @@
+<map id="ladel_workspace_allocate" name="ladel_workspace_allocate">
+<area shape="rect" id="node1" title="Allocate a LADEL workspace." alt="" coords="5,81,196,108"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a15a407b5c8ad9de2faeb93fcd786e099" title="Version of calloc (for mex or for regular C)." alt="" coords="277,5,375,32"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="461,56,566,83"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a7c28f9d8aba3a477eb86d0e37084c504" title="Allocate a set struct." alt="" coords="256,107,396,133"/>
+<area shape="rect" id="node7" href="$ladel__global_8c.html#a0c1ec6da7994389ca70fd3d89ff28619" title="Free a LADEL workspace." alt="" coords="244,157,408,184"/>
+<area shape="rect" id="node5" href="$ladel__global_8c.html#adf80852f1363f544a2bebaadaebcaed4" title="Free a set." alt="" coords="456,107,571,133"/>
+<area shape="rect" id="node6" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="619,132,705,159"/>
+</map>

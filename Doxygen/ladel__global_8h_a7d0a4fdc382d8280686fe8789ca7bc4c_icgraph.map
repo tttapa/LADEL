@@ -1,0 +1,5 @@
+<map id="ladel_realloc" name="ladel_realloc">
+<area shape="rect" id="node1" title="Version of realloc (for mex or for regular C)." alt="" coords="409,5,515,32"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#af8f67d34b27615876be4d1359556890a" title="Reallocate a sparse matrix with a new size." alt="" coords="207,5,361,32"/>
+<area shape="rect" id="node3" href="$ladel__upper__diag_8c.html#a7a4946c49cace1648ec43ab05e35b8e6" title="Return , that is the upper diagonal elements of M." alt="" coords="5,5,159,32"/>
+</map>

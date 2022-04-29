@@ -1,0 +1,8 @@
+<map id="ladel_transpose" name="ladel_transpose">
+<area shape="rect" id="node1" title="Returns the transpose of a matrix, that is ." alt="" coords="5,35,131,62"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="555,60,641,87"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="385,35,491,62"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a6e485045ec098c0b5a9afe07875a1e59" title="Allocate a sparse matrix." alt="" coords="179,86,321,112"/>
+<area shape="rect" id="node5" href="$ladel__global_8c.html#a15a407b5c8ad9de2faeb93fcd786e099" title="Version of calloc (for mex or for regular C)." alt="" coords="389,86,487,112"/>
+<area shape="rect" id="node6" href="$ladel__global_8c.html#afaa07a7aa3c8517d3853968448b398a0" title="Free a sparse matrix (and return NULL)." alt="" coords="369,136,507,163"/>
+</map>

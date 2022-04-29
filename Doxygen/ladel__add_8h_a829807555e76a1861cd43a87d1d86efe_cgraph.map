@@ -1,0 +1,9 @@
+<map id="ladel_add_matrices" name="ladel_add_matrices">
+<area shape="rect" id="node1" title="Returns a sparse matrix ." alt="" coords="5,56,155,83"/>
+<area shape="rect" id="node2" href="$ladel__add_8c.html#a758b63f39a12a53be24928cfd71f0bfe" title="Returns a sparse matrix &#160;if values==TRUE, or a pattern matrix that includes the patterns of A and B i..." alt="" coords="203,49,352,90"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#a6e485045ec098c0b5a9afe07875a1e59" title="Allocate a sparse matrix." alt="" coords="400,56,543,83"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a15a407b5c8ad9de2faeb93fcd786e099" title="Version of calloc (for mex or for regular C)." alt="" coords="610,5,709,32"/>
+<area shape="rect" id="node5" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="607,56,712,83"/>
+<area shape="rect" id="node6" href="$ladel__global_8c.html#afaa07a7aa3c8517d3853968448b398a0" title="Free a sparse matrix (and return NULL)." alt="" coords="591,107,728,133"/>
+<area shape="rect" id="node7" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="776,107,863,133"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="LADEL/include/ladel_global.h" name="LADEL/include/ladel_global.h">
+<area shape="rect" id="node1" title="Memory allocation routines." alt="" coords="87,5,238,47"/>
+<area shape="rect" id="node2" href="$ladel__types_8h.html" title="Structures and types used in LADEL routines." alt="" coords="55,169,164,196"/>
+<area shape="rect" id="node5" href="$ladel__constants_8h.html" title="Constants and macros used in LADEL." alt="" coords="23,95,159,121"/>
+<area shape="rect" id="node6" href="$ladel__copy_8h.html" title="Routines to copy matrices and vectors." alt="" coords="183,95,286,121"/>
+<area shape="rect" id="node7" title=" " alt="" coords="310,95,381,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="23,244,94,271"/>
+<area shape="rect" id="node4" title=" " alt="" coords="118,244,205,271"/>
+</map>

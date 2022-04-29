@@ -1,0 +1,6 @@
+<map id="ladel_mat_mat_transpose_advanced" name="ladel_mat_mat_transpose_advanced">
+<area shape="rect" id="node1" title="Core mat_mat_transpose function with all options (diag and value/pattern)." alt="" coords="244,64,435,105"/>
+<area shape="rect" id="node2" href="$ladel__matmat_8c.html#aeb2ea434d4c66863f8814d3c5a6ce97a" title="Computes ." alt="" coords="23,5,178,47"/>
+<area shape="rect" id="node3" href="$ladel__matmat_8c.html#a9d9a01b808baba381deeab28e25b41e0" title="Computes ." alt="" coords="5,71,196,98"/>
+<area shape="rect" id="node4" href="$ladel__matmat_8c.html#a0b1d696c23cec68f53fe76f6db607572" title="Computes the pattern of ." alt="" coords="5,123,196,164"/>
+</map>

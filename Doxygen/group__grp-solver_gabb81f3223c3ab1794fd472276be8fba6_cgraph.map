@@ -1,0 +1,13 @@
+<map id="ladel_factorize_with_prior_basis_with_diag" name="ladel_factorize_with_prior_basis_with_diag">
+<area shape="rect" id="node1" title="Computes the &#160;factorization of &#160;provided LD was allocated before." alt="" coords="5,107,176,149"/>
+<area shape="rect" id="node2" href="$ladel__etree_8c.html#ab727c0337acfd3e083ce6d8424ea6a6b" title="Computes the elimination tree of a matrix." alt="" coords="280,5,375,32"/>
+<area shape="rect" id="node3" href="$ladel__ldl__numeric_8c.html#aca5dec521536dc26881de005cf3b5932" title="Numerical part of the factorization of ." alt="" coords="224,56,431,83"/>
+<area shape="rect" id="node5" href="$ladel__permutation_8c.html#a6fbceb4b665cce4b4397d74516d284a3" title="Compute ." alt="" coords="231,107,424,149"/>
+<area shape="rect" id="node8" href="$ladel__global_8c.html#a6e485045ec098c0b5a9afe07875a1e59" title="Allocate a sparse matrix." alt="" coords="256,179,399,205"/>
+<area shape="rect" id="node11" href="$ladel__global_8c.html#afaa07a7aa3c8517d3853968448b398a0" title="Free a sparse matrix (and return NULL)." alt="" coords="493,261,631,288"/>
+<area shape="rect" id="node4" href="$ladel__pattern_8c.html#a2f95620dd9c0bb1d33f1dcbdaa9a25b2" title="Computes the pattern of the (next) row in L." alt="" coords="479,43,645,85"/>
+<area shape="rect" id="node6" href="$ladel__copy_8c.html#a97ad68065f3cb0241e4a6427e2e196a7" title="Copies a matrix (preallocated)" alt="" coords="491,109,633,136"/>
+<area shape="rect" id="node7" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="693,185,780,212"/>
+<area shape="rect" id="node9" href="$ladel__global_8c.html#a15a407b5c8ad9de2faeb93fcd786e099" title="Version of calloc (for mex or for regular C)." alt="" coords="513,160,611,187"/>
+<area shape="rect" id="node10" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="509,211,615,237"/>
+</map>

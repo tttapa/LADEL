@@ -1,0 +1,10 @@
+<map id="ladel_col_counts" name="ladel_col_counts">
+<area shape="rect" id="node1" title="Computes the column counts of the factor." alt="" coords="5,71,136,98"/>
+<area shape="rect" id="node2" href="$ladel__col__counts_8c.html#a83727639c00ef21d2af7ccda5f116881" title=" " alt="" coords="184,5,341,47"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#afaa07a7aa3c8517d3853968448b398a0" title="Free a sparse matrix (and return NULL)." alt="" coords="580,71,717,98"/>
+<area shape="rect" id="node5" href="$ladel__transpose_8c.html#a8b00613708b897c9dbcd292dc9b89ed8" title="Returns the transpose of a matrix, that is ." alt="" coords="200,147,325,174"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="765,147,852,174"/>
+<area shape="rect" id="node6" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="596,173,701,199"/>
+<area shape="rect" id="node7" href="$ladel__global_8c.html#a6e485045ec098c0b5a9afe07875a1e59" title="Allocate a sparse matrix." alt="" coords="389,122,532,149"/>
+<area shape="rect" id="node8" href="$ladel__global_8c.html#a15a407b5c8ad9de2faeb93fcd786e099" title="Version of calloc (for mex or for regular C)." alt="" coords="599,122,698,149"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="ladel_invert_permutation_vector" name="ladel_invert_permutation_vector">
+<area shape="rect" id="node1" title="Invert a permutation vector, such that ." alt="" coords="668,35,855,76"/>
+<area shape="rect" id="node2" href="$ladel__ldl__symbolic_8c.html#a919feee5783ed6d5ffaff8dff6546976" title="Symbolic part of the factorization." alt="" coords="477,42,620,69"/>
+<area shape="rect" id="node3" href="$group__grp-solver.html#gaff676fbf1dd6dbf8096c5349d264297f" title="Computes the &#160;factorization of &#160;but allocates based on Mbasis." alt="" coords="241,5,429,47"/>
+<area shape="rect" id="node5" href="$group__grp-solver.html#ga129ea878837012c6ac76fb6046bc9449" title="Computes the &#160;factorization of ." alt="" coords="241,71,429,98"/>
+<area shape="rect" id="node4" href="$group__grp-solver.html#gac217d5bb50524bf6bbc0e7fa473edcfb" title="Computes the &#160;factorization of &#160;but allocates based on Mbasis." alt="" coords="5,13,193,39"/>
+<area shape="rect" id="node6" href="$group__grp-solver.html#ga6167c294e588fe34776d40e53c6ddbc9" title="Computes the &#160;factorization of ." alt="" coords="40,71,159,98"/>
+</map>

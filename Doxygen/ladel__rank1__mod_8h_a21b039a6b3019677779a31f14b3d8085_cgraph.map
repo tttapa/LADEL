@@ -1,0 +1,5 @@
+<map id="ladel_add_nonzero_pattern_to_col_of_L" name="ladel_add_nonzero_pattern_to_col_of_L">
+<area shape="rect" id="node1" title="Adds the nonzero pattern in set to the pattern of the col of L." alt="" coords="5,23,204,65"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a739147d9bee170cc3d4f1910698a0fda" title="Fill in the fields of the given set." alt="" coords="260,5,368,32"/>
+<area shape="rect" id="node3" href="$ladel__rank1__mod_8c.html#a48b2b84795a7de345e14892631b0a258" title="Computes the set union of two index sets." alt="" coords="252,56,376,83"/>
+</map>

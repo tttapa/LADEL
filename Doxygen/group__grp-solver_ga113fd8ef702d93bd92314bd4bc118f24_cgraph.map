@@ -1,0 +1,11 @@
+<map id="ladel_row_add" name="ladel_row_add">
+<area shape="rect" id="node1" title="Updates an &#160;factorization." alt="" coords="5,165,121,192"/>
+<area shape="rect" id="node2" href="$ladel__copy_8c.html#adcdba99af9a8c91a00b1ba4f0fa1c775" title="Copies a double vector (preallocated)" alt="" coords="169,5,360,32"/>
+<area shape="rect" id="node3" href="$ladel__pattern_8c.html#ac558a3c230efb67f771677846dd3f3e7" title="Computes a depth&#45;first search of the given pattern through the elimination tree." alt="" coords="203,56,326,83"/>
+<area shape="rect" id="node4" href="$ladel__copy_8c.html#ab0af0935fc38b50643d179802695ac74" title="Copies an integer vector (preallocated)" alt="" coords="183,107,347,133"/>
+<area shape="rect" id="node5" href="$ladel__permutation_8c.html#af9b1666ea1b1dff808fd7d9689fee88e" title="Permute x(:,col) in place, such that on output ." alt="" coords="181,158,348,199"/>
+<area shape="rect" id="node6" href="$group__grp-solver.html#ga72047161adb30f5041b7e136eb77c023" title="Updates an &#160;factorization." alt="" coords="189,304,340,331"/>
+<area shape="rect" id="node8" href="$ladel__global_8c.html#a739147d9bee170cc3d4f1910698a0fda" title="Fill in the fields of the given set." alt="" coords="663,392,771,419"/>
+<area shape="rect" id="node9" href="$ladel__rank1__mod_8c.html#a48b2b84795a7de345e14892631b0a258" title="Computes the set union of two index sets." alt="" coords="655,275,779,301"/>
+<area shape="rect" id="node7" href="$ladel__rank1__mod_8c.html#a21b039a6b3019677779a31f14b3d8085" title="Adds the nonzero pattern in set to the pattern of the col of L." alt="" coords="408,326,607,367"/>
+</map>

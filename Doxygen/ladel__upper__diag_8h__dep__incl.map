@@ -1,0 +1,7 @@
+<map id="LADEL/include/ladel_upper_diag.h" name="LADEL/include/ladel_upper_diag.h">
+<area shape="rect" id="node1" title="Routine to keep only the upper diagonal elements of a (symmetric) matrix." alt="" coords="176,5,327,47"/>
+<area shape="rect" id="node2" href="$ladel_8h.html" title="LADEL main include file." alt="" coords="75,102,238,129"/>
+<area shape="rect" id="node5" href="$ladel__upper__diag_8c.html" title=" " alt="" coords="263,95,429,136"/>
+<area shape="rect" id="node3" href="$ladel_8c.html" title=" " alt="" coords="5,191,140,218"/>
+<area shape="rect" id="node4" href="$ladel__row__mod_8c.html" title=" " alt="" coords="165,184,319,225"/>
+</map>

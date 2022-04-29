@@ -1,0 +1,10 @@
+<map id="ladel_factor_allocate" name="ladel_factor_allocate">
+<area shape="rect" id="node1" title="Allocate a factors struct." alt="" coords="5,107,164,133"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a15a407b5c8ad9de2faeb93fcd786e099" title="Version of calloc (for mex or for regular C)." alt="" coords="443,107,542,133"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#a2c4e8897e9da3b9463281d19e0971ed5" title="Free a factor." alt="" coords="228,5,360,32"/>
+<area shape="rect" id="node6" href="$ladel__copy_8c.html#ab0af0935fc38b50643d179802695ac74" title="Copies an integer vector (preallocated)" alt="" coords="212,208,376,235"/>
+<area shape="rect" id="node7" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="440,157,545,184"/>
+<area shape="rect" id="node8" href="$ladel__global_8c.html#a6e485045ec098c0b5a9afe07875a1e59" title="Allocate a sparse matrix." alt="" coords="223,56,365,83"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="609,31,696,57"/>
+<area shape="rect" id="node5" href="$ladel__global_8c.html#afaa07a7aa3c8517d3853968448b398a0" title="Free a sparse matrix (and return NULL)." alt="" coords="424,56,561,83"/>
+</map>

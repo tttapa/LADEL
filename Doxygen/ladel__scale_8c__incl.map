@@ -1,0 +1,11 @@
+<map id="LADEL/src/ladel_scale.c" name="LADEL/src/ladel_scale.c">
+<area shape="rect" id="node1" title=" " alt="" coords="337,5,512,32"/>
+<area shape="rect" id="node2" href="$ladel__global_8h.html" title="Memory allocation routines." alt="" coords="184,80,297,107"/>
+<area shape="rect" id="node3" href="$ladel__types_8h.html" title="Structures and types used in LADEL routines." alt="" coords="278,229,387,256"/>
+<area shape="rect" id="node9" href="$ladel__scale_8h.html" title="Routines to scale the columns and rows of a matrix, or the whole matrix itself." alt="" coords="462,80,568,107"/>
+<area shape="rect" id="node6" href="$ladel__constants_8h.html" title="Constants and macros used in LADEL." alt="" coords="28,155,164,181"/>
+<area shape="rect" id="node7" href="$ladel__copy_8h.html" title="Routines to copy matrices and vectors." alt="" coords="189,155,292,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="316,155,386,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="246,304,317,331"/>
+<area shape="rect" id="node5" title=" " alt="" coords="341,304,428,331"/>
+</map>

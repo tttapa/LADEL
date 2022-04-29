@@ -1,0 +1,6 @@
+<map id="ladel_set_allocate" name="ladel_set_allocate">
+<area shape="rect" id="node1" title="Allocate a set struct." alt="" coords="5,31,145,57"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a86142b1e820a5de1deea8ee656186245" title="Version of malloc (for mex or for regular C)." alt="" coords="198,5,303,32"/>
+<area shape="rect" id="node3" href="$ladel__global_8c.html#adf80852f1363f544a2bebaadaebcaed4" title="Free a set." alt="" coords="193,56,308,83"/>
+<area shape="rect" id="node4" href="$ladel__global_8c.html#a946ae8034525eb6db42d4a166be57968" title="Version of free (for mex or for regular C)." alt="" coords="356,56,443,83"/>
+</map>

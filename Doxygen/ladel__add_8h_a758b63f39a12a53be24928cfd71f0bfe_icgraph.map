@@ -1,0 +1,5 @@
+<map id="ladel_add_matrices_advanced" name="ladel_add_matrices_advanced">
+<area shape="rect" id="node1" title="Returns a sparse matrix &#160;if values==TRUE, or a pattern matrix that includes the patterns of A and B i..." alt="" coords="203,27,352,69"/>
+<area shape="rect" id="node2" href="$ladel__add_8c.html#a829807555e76a1861cd43a87d1d86efe" title="Returns a sparse matrix ." alt="" coords="5,5,155,32"/>
+<area shape="rect" id="node3" href="$ladel__add_8c.html#a1322dd7713c9d04b74ddc1927e94f28a" title="Returns a pattern matrix whose pattern includes the patterns of A and B." alt="" coords="5,57,155,98"/>
+</map>

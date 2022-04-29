@@ -1,0 +1,4 @@
+<map id="ladel_symbolics_free" name="ladel_symbolics_free">
+<area shape="rect" id="node1" title="Free a symbolics struct (and return NULL)." alt="" coords="219,5,379,32"/>
+<area shape="rect" id="node2" href="$ladel__global_8c.html#a78d3509d86fdd40fdeb7aab29994251a" title="Allocate a symbolics struct." alt="" coords="5,5,171,32"/>
+</map>

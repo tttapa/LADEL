@@ -1,0 +1,4 @@
+<map id="ladel_sparse_alloc_empty" name="ladel_sparse_alloc_empty">
+<area shape="rect" id="node1" title="Allocate a sparse empty matrix (used in special cases)." alt="" coords="236,5,379,47"/>
+<area shape="rect" id="node2" href="$ladel__submatrix_8c.html#a147c31941734d0ae3fcd28c800051322" title="Returns a matrix that is a selection of columns of M, that is ." alt="" coords="5,13,188,39"/>
+</map>

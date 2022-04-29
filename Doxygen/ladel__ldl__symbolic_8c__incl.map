@@ -1,0 +1,16 @@
+<map id="LADEL/src/ladel_ldl_symbolic.c" name="LADEL/src/ladel_ldl_symbolic.c">
+<area shape="rect" id="node1" title=" " alt="" coords="387,5,533,47"/>
+<area shape="rect" id="node2" href="$ladel__types_8h.html" title="Structures and types used in LADEL routines." alt="" coords="483,319,592,345"/>
+<area shape="rect" id="node5" href="$ladel__constants_8h.html" title="Constants and macros used in LADEL." alt="" coords="64,244,200,271"/>
+<area shape="rect" id="node6" href="$ladel__global_8h.html" title="Memory allocation routines." alt="" coords="242,169,355,196"/>
+<area shape="rect" id="node9" href="$ladel__permutation_8h.html" title="Routines to permute vectors and matrices." alt="" coords="717,169,870,196"/>
+<area shape="rect" id="node10" href="$ladel__etree_8h.html" title="Routines to compute the elimination tree of a matrix." alt="" coords="5,169,112,196"/>
+<area shape="rect" id="node11" href="$ladel__postorder_8h.html" title="Routine to compute the postordering of the elimination tree." alt="" coords="455,169,590,196"/>
+<area shape="rect" id="node12" href="$ladel__col__counts_8h.html" title="Computes the col counts needed for the symbolic factorization (after etree and postorder)." alt="" coords="498,95,641,121"/>
+<area shape="rect" id="node13" href="$ladel__debug__print_8h.html" title="Routines to print out matrices and vectors." alt="" coords="271,95,422,121"/>
+<area shape="rect" id="node14" title=" " alt="" coords="767,95,830,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="451,393,522,420"/>
+<area shape="rect" id="node4" title=" " alt="" coords="546,393,633,420"/>
+<area shape="rect" id="node7" href="$ladel__copy_8h.html" title="Routines to copy matrices and vectors." alt="" coords="225,244,327,271"/>
+<area shape="rect" id="node8" title=" " alt="" coords="403,244,474,271"/>
+</map>
