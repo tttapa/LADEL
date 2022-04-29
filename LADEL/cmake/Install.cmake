@@ -4,6 +4,8 @@ set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/ladel")
 
 # Add the ladel library to the "export-set", install the library files
 install(TARGETS ladel EXPORT ladelTargets
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+        COMPONENT shlib
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
         COMPONENT shlib
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" 
@@ -11,6 +13,8 @@ install(TARGETS ladel EXPORT ladelTargets
 if (LADEL_USE_AMD)
     install(TARGETS ladel_amd amd-headers suitesparse_config-headers 
         EXPORT ladelTargets
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+            COMPONENT shlib
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
             COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" 
